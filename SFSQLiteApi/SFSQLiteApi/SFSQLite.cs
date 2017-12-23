@@ -9,26 +9,32 @@ namespace SFSQLiteApi
 {
     public class SFSQLite
     {
-        #region Members
+        #region Properties
 
         /// <summary>
-        /// Ligação à API
+        /// Gets or sets the connection.
         /// </summary>
+        /// <value>
+        /// The connection.
+        /// </value>
         private SFSQLiteConnection Connection { get; set; }
 
         /// <summary>
-        /// Nome da base de dados
+        /// Gets or sets the database.
         /// </summary>
+        /// <value>
+        /// The database.
+        /// </value>
         private string Database { get; set; }
 
-        #endregion Members
+        #endregion Properties
 
         #region Constructors
 
         /// <summary>
-        /// Cria nova conexão à API (Instanciação)
+        /// Initializes a new instance of the <see cref="SFSQLite"/> class.
         /// </summary>
-        /// <param name="db"></param>
+        /// <param name="db">The database.</param>
         public SFSQLite(string db)
         {
             this.Database = db;
@@ -97,7 +103,7 @@ namespace SFSQLiteApi
         #region Public Methods
 
         /// <summary>
-        /// Fecha ligação à base de dados e destroi objeto
+        /// Closes the connection.
         /// </summary>
         public void CloseConnection()
         {
@@ -106,7 +112,7 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Cria nova tabela na base de dados com base no tipo de objeto T recebido
+        /// Creates the table.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public void CreateTable<T>()
@@ -125,9 +131,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Retorna total de linhas que existem na tabela do objeto T
+        /// Gets the rows total.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public ulong GetRowsTotal<T>(string whereClause = "") where T : new()
         {
@@ -135,9 +142,9 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Insere um novo registo na tabela do tipo do objeto passado como parametro
+        /// Inserts the row.
         /// </summary>
-        /// <param name="insertObj"></param>
+        /// <param name="insertObj">The insert object.</param>
         /// <returns></returns>
         public int InsertRow(object insertObj)
         {
@@ -145,7 +152,7 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Inicia ligação à base de dados
+        /// Opens the connection.
         /// </summary>
         public void OpenConnection()
         {
@@ -153,10 +160,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Retorna lista de objetos T após um SELECT à base de dados
+        /// Selects all rows.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="whereClause"></param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public List<T> SelectAllRows<T>(string whereClause = "") where T : new()
         {
@@ -164,10 +171,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Retorna um objeto T após um SELECT à base de dados
+        /// Selects the one row.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="whereClause"></param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public T SelectOneRow<T>(string whereClause = "") where T : new()
         {
@@ -175,10 +182,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Atualiza registo na tabela do tipo do objeto passado como parametro
+        /// Updates the row.
         /// </summary>
-        /// <param name="updateObj"></param>
-        /// <param name="whereClause"></param>
+        /// <param name="updateObj">The update object.</param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public int UpdateRow(object updateObj, string whereClause = "")
         {

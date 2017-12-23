@@ -12,6 +12,11 @@ namespace SFSQLiteApi.Utils
 {
     internal static class Utility
     {
+        /// <summary>
+        /// Copies the stream.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="output">The output.</param>
         public static void CopyStream(Stream input, Stream output)
         {
             byte[] buffer = new byte[8 * 1024];
@@ -23,6 +28,14 @@ namespace SFSQLiteApi.Utils
             }
         }
 
+        /// <summary>
+        /// Gets the value.
+        /// </summary>
+        /// <param name="photoColumns">The photo columns.</param>
+        /// <param name="photoList">The photo list.</param>
+        /// <param name="property">The property.</param>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
         public static object GetValue(List<string> photoColumns, List<byte[]> photoList, PropertyInfo property, object value)
         {
             if (property.PropertyType.IsByteArray())

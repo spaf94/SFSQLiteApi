@@ -14,12 +14,22 @@ namespace SFSQLiteApi
     {
         #region Members
 
+        /// <summary>
+        /// Gets or sets the connection.
+        /// </summary>
+        /// <value>
+        /// The connection.
+        /// </value>
         private SQLiteConnection Connection { get; set; }
 
         #endregion Members
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SFSQLiteConnection"/> class.
+        /// </summary>
+        /// <param name="db">The database.</param>
         public SFSQLiteConnection(string db)
         {
             //Create database if not exists
@@ -33,7 +43,7 @@ namespace SFSQLiteApi
         #region Public Methods
 
         /// <summary>
-        /// Termina ligação à base de dados
+        /// Closes the database connection.
         /// </summary>
         /// <returns></returns>
         public bool CloseDbConnection()
@@ -62,7 +72,7 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Cria uma nova tabela na base de dados
+        /// Creates the table.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public void CreateTable<T>()
@@ -188,10 +198,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Retorna total de linhas da tabela do objeto T com base no where (caso não seja vazio)
+        /// Gets the rows total.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="whereClause"></param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public ulong GetRowsTotal<T>(string whereClause = "") where T : new()
         {
@@ -225,9 +235,9 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Insere um novo registo na tabela do tipo do objeto passado como parametro
+        /// Inserts the row.
         /// </summary>
-        /// <param name="insertObj"></param>
+        /// <param name="insertObj">The insert object.</param>
         /// <returns></returns>
         public int InsertRow(object insertObj)
         {
@@ -313,10 +323,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Retorna lista de objetos T após um SELECT à base de dados
+        /// Selects all rows.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="whereClause"></param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public List<T> SelectAllRows<T>(string whereClause = "") where T : new()
         {
@@ -368,10 +378,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Retorna um objeto T após um SELECT à base de dados
+        /// Selects the one row.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="whereClause"></param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public T SelectOneRow<T>(string whereClause = "") where T : new()
         {
@@ -381,10 +391,10 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Atualiza registo na tabela do tipo do objeto passado como parametro
+        /// Updates the row.
         /// </summary>
-        /// <param name="updateObj"></param>
-        /// <param name="whereClause"></param>
+        /// <param name="updateObj">The update object.</param>
+        /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
         public int UpdateRow(object updateObj, string whereClause = "")
         {
@@ -488,9 +498,9 @@ namespace SFSQLiteApi
         #region Private Methods
 
         /// <summary>
-        /// Create database if not exists
+        /// Creates the database.
         /// </summary>
-        /// <param name="db"></param>
+        /// <param name="db">The database.</param>
         private void CreateDatabase(string db)
         {
             db = Path.ChangeExtension(db, Constant.SQLite);
@@ -502,11 +512,11 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Inserir/atualizar arrays de bytes na base de dados
+        /// Handles the byte array list.
         /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="byteArrayColumnList"></param>
-        /// <param name="byteArrayList"></param>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="byteArrayColumnList">The byte array column list.</param>
+        /// <param name="byteArrayList">The byte array list.</param>
         private void HandleByteArrayList(string tableName, List<string> byteArrayColumnList, List<byte[]> byteArrayList)
         {
             for (int i = 0; i < byteArrayColumnList.Count; i++)
@@ -516,9 +526,9 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
-        /// Opens a database connection
+        /// Opens the database connection.
         /// </summary>
-        /// <param name="db"></param>
+        /// <param name="db">The database.</param>
         private void OpenDbConnection(string db)
         {
             string connectionString = string.Format(StringFormat.ConnectionString, db);

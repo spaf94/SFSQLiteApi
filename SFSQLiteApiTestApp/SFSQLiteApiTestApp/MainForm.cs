@@ -1,4 +1,5 @@
 ﻿using SFSQLiteApi;
+using SFSQLiteApiTestApp.DataModel;
 using System;
 using System.Windows.Forms;
 
@@ -13,10 +14,14 @@ namespace SFSQLiteApiTestApp
 
         #endregion Members
 
+        #region Constructor
+
         public MainForm()
         {
             InitializeComponent();
         }
+
+        #endregion Constructor
 
         #region 1 - Initialize Api
 
@@ -35,7 +40,7 @@ namespace SFSQLiteApiTestApp
 
         #endregion 1 - Initialize Api
 
-        #region 2 - Create Database
+        #region 2 - Create Database and Open Connection
 
         private void buttonCreateDb_Click(object sender, EventArgs e)
         {
@@ -51,6 +56,113 @@ namespace SFSQLiteApiTestApp
             }
         }
 
-        #endregion 2 - Create Database
+        #endregion 2 - Create Database and Open Connection
+
+        #region 3 - Create Table
+
+        private void buttonCreateTable_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Creates the Person table according to the properties and attributes of the object
+                this.DbTest.CreateTable<Person>();
+                MessageBox.Show("OK");
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        #endregion 3 - Create Table
+
+        #region 4 - Get Rows Total
+
+        private void buttonGetRowsTotal_Click(object sender, EventArgs e)
+        {
+            int totalA = 0;
+            int totalB = 0;
+            string where = string.Empty;
+
+            //Count rows without where statement
+            totalA = (int)this.DbTest.GetRowsTotal<Person>();
+
+            //Count rows with where statement
+            where = "PersonId > 5";
+            totalB = (int)this.DbTest.GetRowsTotal<Person>(where);
+
+            MessageBox.Show(string.Format("Total without where: {0} \n Total with where: {1}", totalA, totalB));
+        }
+
+        #endregion 4 - Get Rows Total
+
+        #region 5 - Insert Row
+
+        private void buttonInsertRow_Click(object sender, EventArgs e)
+        {
+            //For example, gets a new a Id
+            int newId = (int)this.DbTest.GetRowsTotal<Person>() + 1;
+
+            //Creates a new object Person and fill the properties values
+            Person person = new Person();
+            person.PersonId = newId;
+            person.Name = "Person Name " + newId;
+            person.Address = "Person Address " + newId;
+            person.BirthDate = DateTime.Now.AddYears(-newId);
+            person.IsValid = true;
+
+            //Checks if the object exists in the database
+            string where = "PersonId = " + newId;
+
+            if (this.DbTest.GetRowsTotal<Person>(where) == 0)
+            {
+                //If not exists, insert the object in the database
+                if (this.DbTest.InsertRow(person) > 0)
+                {
+                    MessageBox.Show("INSERT OK");
+                }
+                else
+                {
+                    MessageBox.Show("INSERT ERROR");
+                }
+            }
+        }
+
+        #endregion 5 - Insert Row
+
+        #region 6 - Update Row
+
+        private void buttonUpdateRow_Click(object sender, EventArgs e)
+        {
+            //For example, lets update the the person 1
+            Person person = new Person();
+            person.PersonId = 1; //PersonId 1
+            person.Name = "Updated Name";
+            person.Address = "Updated Address";
+            person.BirthDate = new DateTime(1994, 6, 24);
+            person.IsValid = false;
+
+            string where = string.Format("PersonId={0}", person.PersonId);
+
+            //Checks if the object exists in the database
+            if (this.DbTest.GetRowsTotal<Person>(where) > 0)
+            {
+                //If exists, update the object in the database
+                if (this.DbTest.UpdateRow(person) > 0)
+                {
+                    MessageBox.Show("UPDATE OK");
+                }
+                else
+                {
+                    MessageBox.Show("UPDATE ERROR");
+                }
+            }
+            else
+            {
+                MessageBox.Show(string.Format("Person {0} don't exists in the database!", person.PersonId));
+            }
+        }
+
+        #endregion 6 - Update Row
     }
 }

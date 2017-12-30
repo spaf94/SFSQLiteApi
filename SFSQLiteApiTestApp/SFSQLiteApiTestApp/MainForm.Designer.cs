@@ -36,6 +36,10 @@
             this.buttonGetRowsTotal = new System.Windows.Forms.Button();
             this.buttonInsertRow = new System.Windows.Forms.Button();
             this.buttonUpdateRow = new System.Windows.Forms.Button();
+            this.buttonDeleteRow = new System.Windows.Forms.Button();
+            this.buttonSelectAllRows = new System.Windows.Forms.Button();
+            this.buttonSelectOneRow = new System.Windows.Forms.Button();
+            this.buttonCloseConnection = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonInitApi
@@ -115,11 +119,55 @@
             this.buttonUpdateRow.UseVisualStyleBackColor = true;
             this.buttonUpdateRow.Click += new System.EventHandler(this.buttonUpdateRow_Click);
             // 
+            // buttonDeleteRow
+            // 
+            this.buttonDeleteRow.Location = new System.Drawing.Point(12, 214);
+            this.buttonDeleteRow.Name = "buttonDeleteRow";
+            this.buttonDeleteRow.Size = new System.Drawing.Size(267, 23);
+            this.buttonDeleteRow.TabIndex = 8;
+            this.buttonDeleteRow.Text = "7 - Delete Row";
+            this.buttonDeleteRow.UseVisualStyleBackColor = true;
+            this.buttonDeleteRow.Click += new System.EventHandler(this.buttonDeleteRow_Click);
+            // 
+            // buttonSelectAllRows
+            // 
+            this.buttonSelectAllRows.Location = new System.Drawing.Point(12, 243);
+            this.buttonSelectAllRows.Name = "buttonSelectAllRows";
+            this.buttonSelectAllRows.Size = new System.Drawing.Size(267, 23);
+            this.buttonSelectAllRows.TabIndex = 9;
+            this.buttonSelectAllRows.Text = "8 - Select All Rows";
+            this.buttonSelectAllRows.UseVisualStyleBackColor = true;
+            this.buttonSelectAllRows.Click += new System.EventHandler(this.buttonSelectAllRows_Click);
+            // 
+            // buttonSelectOneRow
+            // 
+            this.buttonSelectOneRow.Location = new System.Drawing.Point(12, 272);
+            this.buttonSelectOneRow.Name = "buttonSelectOneRow";
+            this.buttonSelectOneRow.Size = new System.Drawing.Size(267, 23);
+            this.buttonSelectOneRow.TabIndex = 10;
+            this.buttonSelectOneRow.Text = "9 - Select One Row";
+            this.buttonSelectOneRow.UseVisualStyleBackColor = true;
+            this.buttonSelectOneRow.Click += new System.EventHandler(this.buttonSelectOneRow_Click);
+            // 
+            // buttonCloseConnection
+            // 
+            this.buttonCloseConnection.Location = new System.Drawing.Point(12, 301);
+            this.buttonCloseConnection.Name = "buttonCloseConnection";
+            this.buttonCloseConnection.Size = new System.Drawing.Size(267, 23);
+            this.buttonCloseConnection.TabIndex = 11;
+            this.buttonCloseConnection.Text = "10 - Close Connection";
+            this.buttonCloseConnection.UseVisualStyleBackColor = true;
+            this.buttonCloseConnection.Click += new System.EventHandler(this.buttonCloseConnection_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(292, 334);
+            this.Controls.Add(this.buttonCloseConnection);
+            this.Controls.Add(this.buttonSelectOneRow);
+            this.Controls.Add(this.buttonSelectAllRows);
+            this.Controls.Add(this.buttonDeleteRow);
             this.Controls.Add(this.buttonUpdateRow);
             this.Controls.Add(this.buttonInsertRow);
             this.Controls.Add(this.buttonGetRowsTotal);
@@ -145,6 +193,10 @@
         private System.Windows.Forms.Button buttonGetRowsTotal;
         private System.Windows.Forms.Button buttonInsertRow;
         private System.Windows.Forms.Button buttonUpdateRow;
+        private System.Windows.Forms.Button buttonDeleteRow;
+        private System.Windows.Forms.Button buttonSelectAllRows;
+        private System.Windows.Forms.Button buttonSelectOneRow;
+        private System.Windows.Forms.Button buttonCloseConnection;
     }
 }
 

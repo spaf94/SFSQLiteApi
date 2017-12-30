@@ -1,6 +1,9 @@
 ﻿using SFSQLiteApi;
 using SFSQLiteApiTestApp.DataModel;
 using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace SFSQLiteApiTestApp
@@ -164,5 +167,105 @@ namespace SFSQLiteApiTestApp
         }
 
         #endregion 6 - Update Row
+
+        #region 7 - Delete Row
+
+        private void buttonDeleteRow_Click(object sender, EventArgs e)
+        {
+            //For example, lets delete the the person 1
+            Person person = new Person();
+            person.PersonId = 1; //PersonId 1
+
+            /*
+            person.Name = "Updated Name";
+            person.Address = "Updated Address";
+            person.BirthDate = new DateTime(1994, 6, 24);
+            person.IsValid = false;
+            */
+
+            string where = string.Format("PersonId={0}", person.PersonId);
+
+            //Delete the object from the database
+            if (this.DbTest.DeleteRow(person) > 0)
+            {
+                MessageBox.Show("DELETE OK");
+            }
+            else
+            {
+                MessageBox.Show("ERROR OR OBJECT NOT FOUND");
+            }
+        }
+
+        #endregion 7 - Delete Row
+
+        #region 8 - Select All Rows
+
+        private void buttonSelectAllRows_Click(object sender, EventArgs e)
+        {
+            //Select all persons from database without where clause
+            var personList = this.DbTest.SelectAllRows<Person>();
+            this.ShowPersonListInfo(personList);
+
+            //Select all persons from database with where statement
+            string where = "PersonId > 3";
+            personList = this.DbTest.SelectAllRows<Person>(where);
+            this.ShowPersonListInfo(personList);
+        }
+
+        #endregion 8 - Select All Rows
+
+        #region 9 - Select One Row
+
+        private void buttonSelectOneRow_Click(object sender, EventArgs e)
+        {
+            //Selects the person id 3 from database
+            string where = "PersonId = 3";
+            var person = this.DbTest.SelectOneRow<Person>(where);
+            this.ShowPersonInfo(person);
+        }
+
+        #endregion 9 - Select One Row
+
+        #region 10 - Close Connection
+
+        private void buttonCloseConnection_Click(object sender, EventArgs e)
+        {
+            this.DbTest.CloseConnection();
+        }
+
+        #endregion 10 - Close Connection
+
+        #region Util Methods
+
+        /// <summary>
+        /// Shows the person information.
+        /// </summary>
+        /// <param name="person">The person.</param>
+        private void ShowPersonInfo(Person person)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            MessageBox.Show(jss.Serialize(person));
+        }
+
+        /// <summary>
+        /// Shows the person list information.
+        /// </summary>
+        /// <param name="personList">The person list.</param>
+        private void ShowPersonListInfo(List<Person> personList)
+        {
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            StringBuilder sbPersonList = new StringBuilder();
+
+            foreach (Person person in personList)
+            {
+                string aux = jss.Serialize(person);
+                sbPersonList.AppendLine(aux);
+                sbPersonList.AppendLine();
+            }
+
+            MessageBox.Show(sbPersonList.ToString());
+        }
+
+        #endregion Util Methods
     }
 }

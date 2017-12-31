@@ -203,9 +203,9 @@ namespace SFSQLiteApi
         /// <typeparam name="T"></typeparam>
         /// <param name="whereClause">The where clause.</param>
         /// <returns></returns>
-        public ulong GetRowsTotal<T>(string whereClause = "") where T : new()
+        public int GetRowsTotal<T>(string whereClause = "") where T : new()
         {
-            ulong returnValue = 0;
+            int returnValue = 0;
             SQLiteDataReader reader = null;
 
             try
@@ -218,7 +218,7 @@ namespace SFSQLiteApi
 
                 while (reader.Read())
                 {
-                    returnValue = Convert.ToUInt64(reader[Constant.TotalCount]);
+                    returnValue = Convert.ToInt32(reader[Constant.TotalCount]);
                 }
             }
             catch (Exception exception)
@@ -388,6 +388,50 @@ namespace SFSQLiteApi
             var objectList = this.SelectAllRows<T>(whereClause);
 
             return (objectList.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Gets the column maximum value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns></returns>
+        public object GetColumnMaxValue<T>(string columnName)
+        {
+            object returnValue = null;
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                Type type = typeof(T);
+                var propertyList = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                string sqlQuery = SQLiteQuery.MaxFromTable(type.Name, columnName);
+                reader = SQLiteQuery.ExecuteReader(sqlQuery, this.Connection);
+
+                while (reader.Read())
+                {
+                    returnValue = reader[Constant.MaxValue].ToString();
+                }
+
+                var property = propertyList.FirstOrDefault(x => x.Name == columnName);
+
+                if (property != null)
+                {
+                    returnValue = Convert.ChangeType(returnValue, property.PropertyType);
+                }
+            }
+            catch (Exception exception)
+            {
+                SFLog.ConsoleWriteLine(exception.Message);
+            }
+            finally
+            {
+                reader.Close();
+                reader = null;
+            }
+
+            return returnValue;
         }
 
         /// <summary>

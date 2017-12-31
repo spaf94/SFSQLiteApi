@@ -15,5 +15,6 @@ namespace SFSQLiteApi.Utils
         public const string x64 = "x64";
         public const string x86 = "x86";
         public const string TotalCount = "TotalCount";
+        public const string MaxValue = "MaxValue";
     }
 }

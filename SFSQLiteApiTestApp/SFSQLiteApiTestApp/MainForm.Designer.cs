@@ -40,6 +40,7 @@
             this.buttonSelectAllRows = new System.Windows.Forms.Button();
             this.buttonSelectOneRow = new System.Windows.Forms.Button();
             this.buttonCloseConnection = new System.Windows.Forms.Button();
+            this.buttonGetColumnMaxValue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonInitApi
@@ -151,19 +152,30 @@
             // 
             // buttonCloseConnection
             // 
-            this.buttonCloseConnection.Location = new System.Drawing.Point(12, 301);
+            this.buttonCloseConnection.Location = new System.Drawing.Point(12, 330);
             this.buttonCloseConnection.Name = "buttonCloseConnection";
             this.buttonCloseConnection.Size = new System.Drawing.Size(267, 23);
             this.buttonCloseConnection.TabIndex = 11;
-            this.buttonCloseConnection.Text = "10 - Close Connection";
+            this.buttonCloseConnection.Text = "11 - Close Connection";
             this.buttonCloseConnection.UseVisualStyleBackColor = true;
             this.buttonCloseConnection.Click += new System.EventHandler(this.buttonCloseConnection_Click);
+            // 
+            // buttonGetColumnMaxValue
+            // 
+            this.buttonGetColumnMaxValue.Location = new System.Drawing.Point(12, 301);
+            this.buttonGetColumnMaxValue.Name = "buttonGetColumnMaxValue";
+            this.buttonGetColumnMaxValue.Size = new System.Drawing.Size(267, 23);
+            this.buttonGetColumnMaxValue.TabIndex = 12;
+            this.buttonGetColumnMaxValue.Text = "10 - Get Column Max Value";
+            this.buttonGetColumnMaxValue.UseVisualStyleBackColor = true;
+            this.buttonGetColumnMaxValue.Click += new System.EventHandler(this.buttonGetColumnMaxValue_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 334);
+            this.ClientSize = new System.Drawing.Size(292, 363);
+            this.Controls.Add(this.buttonGetColumnMaxValue);
             this.Controls.Add(this.buttonCloseConnection);
             this.Controls.Add(this.buttonSelectOneRow);
             this.Controls.Add(this.buttonSelectAllRows);
@@ -197,6 +209,7 @@
         private System.Windows.Forms.Button buttonSelectAllRows;
         private System.Windows.Forms.Button buttonSelectOneRow;
         private System.Windows.Forms.Button buttonCloseConnection;
+        private System.Windows.Forms.Button buttonGetColumnMaxValue;
     }
 }
 

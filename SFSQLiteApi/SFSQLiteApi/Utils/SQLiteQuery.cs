@@ -99,6 +99,17 @@ namespace SFSQLiteApi.Utils
         }
 
         /// <summary>
+        /// Maximums from table.
+        /// </summary>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns></returns>
+        public static string MaxFromTable(string tableName, string columnName)
+        {
+            return (string.Format("SELECT MAX({0}) AS '{1}' FROM {2}", columnName, Constant.MaxValue, tableName));
+        }
+
+        /// <summary>
         /// Selects all from.
         /// </summary>
         /// <param name="tableName">Name of the table.</param>

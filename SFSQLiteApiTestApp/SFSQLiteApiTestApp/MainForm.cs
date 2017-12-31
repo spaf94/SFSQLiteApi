@@ -104,7 +104,7 @@ namespace SFSQLiteApiTestApp
         private void buttonInsertRow_Click(object sender, EventArgs e)
         {
             //For example, gets a new a Id
-            int newId = (int)this.DbTest.GetRowsTotal<Person>() + 1;
+            int newId = (int)this.DbTest.GetColumnMaxValue<Person>("PersonId") + 1;
 
             //Creates a new object Person and fill the properties values
             Person person = new Person();
@@ -226,14 +226,29 @@ namespace SFSQLiteApiTestApp
 
         #endregion 9 - Select One Row
 
-        #region 10 - Close Connection
+        #region 10 - Get Column Max Value
+
+        private void buttonGetColumnMaxValue_Click(object sender, EventArgs e)
+        {
+            //Gets max PersonId - Necessary the cast to Int32 type
+            int maxPersonId = (int)this.DbTest.GetColumnMaxValue<Person>("PersonId");
+            //Gets max BirthDate - necessary the cast to DateTime type
+            DateTime maxBirthDate = (DateTime)this.DbTest.GetColumnMaxValue<Person>("BirthDate");
+
+            MessageBox.Show(string.Format("Max PersonId: {0} | Max BirthDate: {1}", maxPersonId, maxBirthDate));
+        }
+
+        #endregion 10 - Get Column Max Value
+
+        #region 11 - Close Connection
 
         private void buttonCloseConnection_Click(object sender, EventArgs e)
         {
             this.DbTest.CloseConnection();
+            MessageBox.Show("OK");
         }
 
-        #endregion 10 - Close Connection
+        #endregion 11 - Close Connection
 
         #region Util Methods
 

@@ -41,13 +41,15 @@
             this.buttonSelectOneRow = new System.Windows.Forms.Button();
             this.buttonCloseConnection = new System.Windows.Forms.Button();
             this.buttonGetColumnMaxValue = new System.Windows.Forms.Button();
+            this.buttonActivateLogs = new System.Windows.Forms.Button();
+            this.buttonDeactivateLogs = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonInitApi
             // 
-            this.buttonInitApi.Location = new System.Drawing.Point(13, 13);
+            this.buttonInitApi.Location = new System.Drawing.Point(13, 12);
             this.buttonInitApi.Name = "buttonInitApi";
-            this.buttonInitApi.Size = new System.Drawing.Size(267, 23);
+            this.buttonInitApi.Size = new System.Drawing.Size(95, 23);
             this.buttonInitApi.TabIndex = 0;
             this.buttonInitApi.Text = "1 - Initialize Api";
             this.buttonInitApi.UseVisualStyleBackColor = true;
@@ -57,7 +59,7 @@
             // 
             this.textBoxDbName.Location = new System.Drawing.Point(102, 43);
             this.textBoxDbName.Name = "textBoxDbName";
-            this.textBoxDbName.Size = new System.Drawing.Size(178, 20);
+            this.textBoxDbName.Size = new System.Drawing.Size(208, 20);
             this.textBoxDbName.TabIndex = 1;
             this.textBoxDbName.Text = "HelloDb";
             // 
@@ -74,7 +76,7 @@
             // 
             this.buttonCreateDb.Location = new System.Drawing.Point(12, 69);
             this.buttonCreateDb.Name = "buttonCreateDb";
-            this.buttonCreateDb.Size = new System.Drawing.Size(267, 23);
+            this.buttonCreateDb.Size = new System.Drawing.Size(298, 23);
             this.buttonCreateDb.TabIndex = 3;
             this.buttonCreateDb.Text = "2 - Create Database and Open Connection";
             this.buttonCreateDb.UseVisualStyleBackColor = true;
@@ -84,7 +86,7 @@
             // 
             this.buttonCreateTable.Location = new System.Drawing.Point(12, 98);
             this.buttonCreateTable.Name = "buttonCreateTable";
-            this.buttonCreateTable.Size = new System.Drawing.Size(267, 23);
+            this.buttonCreateTable.Size = new System.Drawing.Size(298, 23);
             this.buttonCreateTable.TabIndex = 4;
             this.buttonCreateTable.Text = "3 - Create Table";
             this.buttonCreateTable.UseVisualStyleBackColor = true;
@@ -94,7 +96,7 @@
             // 
             this.buttonGetRowsTotal.Location = new System.Drawing.Point(12, 127);
             this.buttonGetRowsTotal.Name = "buttonGetRowsTotal";
-            this.buttonGetRowsTotal.Size = new System.Drawing.Size(267, 23);
+            this.buttonGetRowsTotal.Size = new System.Drawing.Size(298, 23);
             this.buttonGetRowsTotal.TabIndex = 5;
             this.buttonGetRowsTotal.Text = "4 - Get Rows Total";
             this.buttonGetRowsTotal.UseVisualStyleBackColor = true;
@@ -104,7 +106,7 @@
             // 
             this.buttonInsertRow.Location = new System.Drawing.Point(13, 156);
             this.buttonInsertRow.Name = "buttonInsertRow";
-            this.buttonInsertRow.Size = new System.Drawing.Size(267, 23);
+            this.buttonInsertRow.Size = new System.Drawing.Size(297, 23);
             this.buttonInsertRow.TabIndex = 6;
             this.buttonInsertRow.Text = "5 - Insert Row";
             this.buttonInsertRow.UseVisualStyleBackColor = true;
@@ -114,7 +116,7 @@
             // 
             this.buttonUpdateRow.Location = new System.Drawing.Point(13, 185);
             this.buttonUpdateRow.Name = "buttonUpdateRow";
-            this.buttonUpdateRow.Size = new System.Drawing.Size(267, 23);
+            this.buttonUpdateRow.Size = new System.Drawing.Size(297, 23);
             this.buttonUpdateRow.TabIndex = 7;
             this.buttonUpdateRow.Text = "6 - Update Row";
             this.buttonUpdateRow.UseVisualStyleBackColor = true;
@@ -124,7 +126,7 @@
             // 
             this.buttonDeleteRow.Location = new System.Drawing.Point(12, 214);
             this.buttonDeleteRow.Name = "buttonDeleteRow";
-            this.buttonDeleteRow.Size = new System.Drawing.Size(267, 23);
+            this.buttonDeleteRow.Size = new System.Drawing.Size(298, 23);
             this.buttonDeleteRow.TabIndex = 8;
             this.buttonDeleteRow.Text = "7 - Delete Row";
             this.buttonDeleteRow.UseVisualStyleBackColor = true;
@@ -134,7 +136,7 @@
             // 
             this.buttonSelectAllRows.Location = new System.Drawing.Point(12, 243);
             this.buttonSelectAllRows.Name = "buttonSelectAllRows";
-            this.buttonSelectAllRows.Size = new System.Drawing.Size(267, 23);
+            this.buttonSelectAllRows.Size = new System.Drawing.Size(298, 23);
             this.buttonSelectAllRows.TabIndex = 9;
             this.buttonSelectAllRows.Text = "8 - Select All Rows";
             this.buttonSelectAllRows.UseVisualStyleBackColor = true;
@@ -144,7 +146,7 @@
             // 
             this.buttonSelectOneRow.Location = new System.Drawing.Point(12, 272);
             this.buttonSelectOneRow.Name = "buttonSelectOneRow";
-            this.buttonSelectOneRow.Size = new System.Drawing.Size(267, 23);
+            this.buttonSelectOneRow.Size = new System.Drawing.Size(298, 23);
             this.buttonSelectOneRow.TabIndex = 10;
             this.buttonSelectOneRow.Text = "9 - Select One Row";
             this.buttonSelectOneRow.UseVisualStyleBackColor = true;
@@ -154,7 +156,7 @@
             // 
             this.buttonCloseConnection.Location = new System.Drawing.Point(12, 330);
             this.buttonCloseConnection.Name = "buttonCloseConnection";
-            this.buttonCloseConnection.Size = new System.Drawing.Size(267, 23);
+            this.buttonCloseConnection.Size = new System.Drawing.Size(298, 23);
             this.buttonCloseConnection.TabIndex = 11;
             this.buttonCloseConnection.Text = "11 - Close Connection";
             this.buttonCloseConnection.UseVisualStyleBackColor = true;
@@ -164,17 +166,39 @@
             // 
             this.buttonGetColumnMaxValue.Location = new System.Drawing.Point(12, 301);
             this.buttonGetColumnMaxValue.Name = "buttonGetColumnMaxValue";
-            this.buttonGetColumnMaxValue.Size = new System.Drawing.Size(267, 23);
+            this.buttonGetColumnMaxValue.Size = new System.Drawing.Size(298, 23);
             this.buttonGetColumnMaxValue.TabIndex = 12;
             this.buttonGetColumnMaxValue.Text = "10 - Get Column Max Value";
             this.buttonGetColumnMaxValue.UseVisualStyleBackColor = true;
             this.buttonGetColumnMaxValue.Click += new System.EventHandler(this.buttonGetColumnMaxValue_Click);
             // 
+            // buttonActivateLogs
+            // 
+            this.buttonActivateLogs.Location = new System.Drawing.Point(114, 12);
+            this.buttonActivateLogs.Name = "buttonActivateLogs";
+            this.buttonActivateLogs.Size = new System.Drawing.Size(95, 23);
+            this.buttonActivateLogs.TabIndex = 13;
+            this.buttonActivateLogs.Text = "Activate Logs";
+            this.buttonActivateLogs.UseVisualStyleBackColor = true;
+            this.buttonActivateLogs.Click += new System.EventHandler(this.buttonActivateLogs_Click);
+            // 
+            // buttonDeactivateLogs
+            // 
+            this.buttonDeactivateLogs.Location = new System.Drawing.Point(215, 12);
+            this.buttonDeactivateLogs.Name = "buttonDeactivateLogs";
+            this.buttonDeactivateLogs.Size = new System.Drawing.Size(95, 23);
+            this.buttonDeactivateLogs.TabIndex = 14;
+            this.buttonDeactivateLogs.Text = "Deactivate Logs";
+            this.buttonDeactivateLogs.UseVisualStyleBackColor = true;
+            this.buttonDeactivateLogs.Click += new System.EventHandler(this.buttonDeactivateLogs_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 363);
+            this.ClientSize = new System.Drawing.Size(322, 363);
+            this.Controls.Add(this.buttonDeactivateLogs);
+            this.Controls.Add(this.buttonActivateLogs);
             this.Controls.Add(this.buttonGetColumnMaxValue);
             this.Controls.Add(this.buttonCloseConnection);
             this.Controls.Add(this.buttonSelectOneRow);
@@ -210,6 +234,8 @@
         private System.Windows.Forms.Button buttonSelectOneRow;
         private System.Windows.Forms.Button buttonCloseConnection;
         private System.Windows.Forms.Button buttonGetColumnMaxValue;
+        private System.Windows.Forms.Button buttonActivateLogs;
+        private System.Windows.Forms.Button buttonDeactivateLogs;
     }
 }
 

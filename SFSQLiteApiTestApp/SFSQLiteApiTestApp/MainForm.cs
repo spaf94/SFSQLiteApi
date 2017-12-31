@@ -282,5 +282,19 @@ namespace SFSQLiteApiTestApp
         }
 
         #endregion Util Methods
+
+        #region Log
+
+        private void buttonActivateLogs_Click(object sender, EventArgs e)
+        {
+            SFSQLite.ActivateLogs();
+        }
+
+        private void buttonDeactivateLogs_Click(object sender, EventArgs e)
+        {
+            SFSQLite.DeactivateLogs();
+        }
+
+        #endregion Log
     }
 }

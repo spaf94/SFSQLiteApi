@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SFSQLiteApi.Utils
 {
@@ -44,13 +39,11 @@ namespace SFSQLiteApi.Utils
                 photoList.Add((byte[])value);
                 return 0;
             }
-
-            if (property.PropertyType.IsBool())
+            else if (property.PropertyType.IsBool())
             {
                 return (Convert.ToInt16(value));
             }
-
-            if ((value == null) && property.PropertyType.IsString())
+            else if ((value == null) && property.PropertyType.IsString())
             {
                 return (string.Empty);
             }

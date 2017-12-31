@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SFSQLiteApi.Utils
 {
@@ -10,19 +6,86 @@ namespace SFSQLiteApi.Utils
     {
         #region Members
 
-        private const string Numeric = "NUMERIC";
-        private const string Integer = "INTEGER";
-        private const string Text = "TEXT";
-        private const string Real = "REAL";
         private const string Blob = "BLOB";
         private const string ByteArray = "Byte[]";
+        private const string Integer = "INTEGER";
+        private const string Numeric = "NUMERIC";
+        private const string Real = "REAL";
+        private const string Text = "TEXT";
 
-        #endregion
+        #endregion Members
+
+        #region Public Methods
 
         /// <summary>
-        /// Converte um tipo de dados para o tipo de dados SQLite em string
+        /// Gets the type of the data.
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="inType">Type of the in.</param>
+        /// <param name="outType">Type of the out.</param>
+        public static void GetDataType(Type inType, out Type outType)
+        {
+            outType = inType;
+
+            if (inType.IsNull())
+            {
+                outType = Nullable.GetUnderlyingType(inType);
+            }
+        }
+
+        /// <summary>
+        /// Determines whether this instance is bool.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified type is bool; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsBool(this Type type)
+        {
+            GetDataType(type, out type);
+            return (Type.GetTypeCode(type) == TypeCode.Boolean);
+        }
+
+        /// <summary>
+        /// Determines whether [is byte array].
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if [is byte array] [the specified type]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsByteArray(this Type type)
+        {
+            return (type.Name == ByteArray);
+        }
+
+        /// <summary>
+        /// Determines whether this instance is null.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified type is null; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsNull(this Type type)
+        {
+            return (Nullable.GetUnderlyingType(type) != null);
+        }
+
+        /// <summary>
+        /// Determines whether this instance is string.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified type is string; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsString(this Type type)
+        {
+            GetDataType(type, out type);
+            return (Type.GetTypeCode(type) == TypeCode.String);
+        }
+
+        /// <summary>
+        /// To the type of the sq lite data.
+        /// </summary>
+        /// <param name="type">The type.</param>
         /// <returns></returns>
         public static string ToSQLiteDataType(this Type type)
         {
@@ -58,61 +121,6 @@ namespace SFSQLiteApi.Utils
             return Blob;
         }
 
-        /// <summary>
-        /// Obter tipo de dados principal no caso de permitir nulos
-        /// </summary>
-        /// <param name="inType"></param>
-        /// <param name="outType"></param>
-        public static void GetDataType(Type inType, out Type outType)
-        {
-            outType = inType;
-
-            if (inType.IsNull())
-            {
-                outType = Nullable.GetUnderlyingType(inType);
-            }
-        }
-
-        /// <summary>
-        /// Retorna se um tipo de dados permite nulos
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static bool IsNull(this Type type)
-        {
-            return (Nullable.GetUnderlyingType(type) != null);
-        }
-
-        /// <summary>
-        /// Retorna se um tipo de dados é um booleano
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static bool IsBool(this Type type)
-        {
-            GetDataType(type, out type);
-            return (Type.GetTypeCode(type) == TypeCode.Boolean);
-        }
-
-        /// <summary>
-        /// Retorna se um tipo de dados é um array de bytes
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static bool IsByteArray(this Type type)
-        {
-            return (type.Name == ByteArray);
-        }
-
-        /// <summary>
-        /// Retorna se um tipo de dados é uma string
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static bool IsString(this Type type)
-        {
-            GetDataType(type, out type);
-            return (Type.GetTypeCode(type) == TypeCode.String);
-        }
+        #endregion Public Methods
     }
 }

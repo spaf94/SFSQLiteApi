@@ -1,5 +1,6 @@
 ﻿using LoadDllAsEmbeddedRes;
 using SFSQLiteApi.Utils;
+using SFSQLiteApi.Utils.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -45,6 +46,22 @@ namespace SFSQLiteApi
         #region Public Static Methods
 
         /// <summary>
+        /// Activates the logs.
+        /// </summary>
+        public static void ActivateLogs()
+        {
+            APILog.ActivateLog();
+        }
+
+        /// <summary>
+        /// Deactivates the logs.
+        /// </summary>
+        public static void DeactivateLogs()
+        {
+            APILog.DeactivateLog();
+        }
+
+        /// <summary>
         /// Inicializa API
         /// </summary>
         public static void InitializeApi()
@@ -57,6 +74,11 @@ namespace SFSQLiteApi
                 if (resource.Contains(Constant.SQLiteDll))
                 {
                     EmbeddedAssembly.Load(resource, Constant.SQLiteDll);
+                    AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
+                }
+                else if (resource.Contains(Constant.SFLogDll))
+                {
+                    EmbeddedAssembly.Load(resource, Constant.SFLogDll);
                     AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
                 }
                 else
@@ -284,10 +306,10 @@ namespace SFSQLiteApi
         /// <summary>
         /// Throws the connection exception.
         /// </summary>
-        /// <exception cref="System.Exception">Necessary create a SFSQLiteConnection. Use method OpenConnection().</exception>
+        /// <exception cref="System.Exception">Connection not created. Use method OpenConnection().</exception>
         private void ThrowConnectionException()
         {
-            throw new Exception("Necessary create a SFSQLiteConnection. Use method OpenConnection().");
+            throw new Exception("Connection not created. Use method OpenConnection().");
         }
 
         #endregion Private Methods

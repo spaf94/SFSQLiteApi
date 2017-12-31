@@ -1,4 +1,5 @@
 ﻿using SFSQLiteApi.Utils;
+using SFSQLiteApi.Utils.Log;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -59,7 +60,7 @@ namespace SFSQLiteApi
             }
             catch (Exception exception)
             {
-                SFLog.WriteError(this, "CloseDbConnection", exception.Message);
+                APILog.Error(this, "CloseDbConnection", exception);
                 result = false;
             }
             finally
@@ -145,7 +146,7 @@ namespace SFSQLiteApi
             }
             catch (Exception exception)
             {
-                SFLog.WriteError(this, "CreateTable", exception.Message);
+                APILog.Error(this, "CreateTable", exception);
             }
         }
 
@@ -198,6 +199,50 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Gets the column maximum value.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="columnName">Name of the column.</param>
+        /// <returns></returns>
+        public object GetColumnMaxValue<T>(string columnName)
+        {
+            object returnValue = null;
+            SQLiteDataReader reader = null;
+
+            try
+            {
+                Type type = typeof(T);
+                var propertyList = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                string sqlQuery = SQLiteQuery.MaxFromTable(type.Name, columnName);
+                reader = SQLiteQuery.ExecuteReader(sqlQuery, this.Connection);
+
+                while (reader.Read())
+                {
+                    returnValue = reader[Constant.MaxValue].ToString();
+                }
+
+                var property = propertyList.FirstOrDefault(x => x.Name == columnName);
+
+                if (property != null)
+                {
+                    returnValue = Convert.ChangeType(returnValue, property.PropertyType);
+                }
+            }
+            catch (Exception exception)
+            {
+                APILog.Error(this, "GetColumnMaxValue", exception);
+            }
+            finally
+            {
+                reader.Close();
+                reader = null;
+            }
+
+            return returnValue;
+        }
+
+        /// <summary>
         /// Gets the rows total.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -223,7 +268,7 @@ namespace SFSQLiteApi
             }
             catch (Exception exception)
             {
-                SFLog.ConsoleWriteLine(exception.Message);
+                APILog.Error(this, "GetRowsTotal", exception);
             }
             finally
             {
@@ -366,7 +411,7 @@ namespace SFSQLiteApi
             }
             catch (Exception exception)
             {
-                SFLog.ConsoleWriteLine(exception.Message);
+                APILog.Error(this, "SelectAllRows", exception);
             }
             finally
             {
@@ -388,50 +433,6 @@ namespace SFSQLiteApi
             var objectList = this.SelectAllRows<T>(whereClause);
 
             return (objectList.FirstOrDefault());
-        }
-
-        /// <summary>
-        /// Gets the column maximum value.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="tableName">Name of the table.</param>
-        /// <param name="columnName">Name of the column.</param>
-        /// <returns></returns>
-        public object GetColumnMaxValue<T>(string columnName)
-        {
-            object returnValue = null;
-            SQLiteDataReader reader = null;
-
-            try
-            {
-                Type type = typeof(T);
-                var propertyList = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                string sqlQuery = SQLiteQuery.MaxFromTable(type.Name, columnName);
-                reader = SQLiteQuery.ExecuteReader(sqlQuery, this.Connection);
-
-                while (reader.Read())
-                {
-                    returnValue = reader[Constant.MaxValue].ToString();
-                }
-
-                var property = propertyList.FirstOrDefault(x => x.Name == columnName);
-
-                if (property != null)
-                {
-                    returnValue = Convert.ChangeType(returnValue, property.PropertyType);
-                }
-            }
-            catch (Exception exception)
-            {
-                SFLog.ConsoleWriteLine(exception.Message);
-            }
-            finally
-            {
-                reader.Close();
-                reader = null;
-            }
-
-            return returnValue;
         }
 
         /// <summary>

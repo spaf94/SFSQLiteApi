@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using SFSQLiteApi.Utils.Log;
+using System.Data;
 using System.Data.SQLite;
 using System.Text;
 
@@ -37,7 +38,7 @@ namespace SFSQLiteApi.Utils
         {
             using (var command = new SQLiteCommand(sqlQuery, connection))
             {
-                SFLog.ConsoleWriteLine(sqlQuery);
+                APILog.Debug(typeof(SQLiteQuery), "ExecuteNonQuery", sqlQuery);
 
                 return command.ExecuteNonQuery();
             }
@@ -53,7 +54,7 @@ namespace SFSQLiteApi.Utils
         {
             using (var command = new SQLiteCommand(sqlQuery, connection))
             {
-                SFLog.ConsoleWriteLine(sqlQuery);
+                APILog.Debug(typeof(SQLiteQuery), "ExecuteReader", sqlQuery);
 
                 return command.ExecuteReader();
             }
@@ -88,8 +89,6 @@ namespace SFSQLiteApi.Utils
                     command.Prepare();
                     command.Parameters.Add("@img", DbType.Binary, byteArray.Length);
                     command.Parameters["@img"].Value = byteArray;
-
-                    SFLog.ConsoleWriteLine(command.CommandText);
 
                     return command.ExecuteNonQuery();
                 }

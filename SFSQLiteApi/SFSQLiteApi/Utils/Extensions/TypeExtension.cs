@@ -58,6 +58,19 @@ namespace SFSQLiteApi.Utils
         }
 
         /// <summary>
+        /// Determines whether [is date time].
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if [is date time] [the specified type]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsDateTime(this Type type)
+        {
+            GetDataType(type, out type);
+            return (Type.GetTypeCode(type) == TypeCode.DateTime);
+        }
+
+        /// <summary>
         /// Determines whether this instance is null.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -67,6 +80,38 @@ namespace SFSQLiteApi.Utils
         public static bool IsNull(this Type type)
         {
             return (Nullable.GetUnderlyingType(type) != null);
+        }
+
+        /// <summary>
+        /// Determines whether this instance is number.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified type is number; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsNumber(this Type type)
+        {
+            GetDataType(type, out type);
+            TypeCode typeCode = Type.GetTypeCode(type);
+
+            switch (typeCode)
+            {
+                case TypeCode.Byte:
+                case TypeCode.Int16:
+                case TypeCode.Int32:
+                case TypeCode.Int64:
+                case TypeCode.SByte:
+                case TypeCode.UInt16:
+                case TypeCode.UInt32:
+                case TypeCode.UInt64:
+                case TypeCode.Decimal:
+                case TypeCode.Double:
+                case TypeCode.Single:
+                    return true;
+
+                default:
+                    return false;
+            }
         }
 
         /// <summary>

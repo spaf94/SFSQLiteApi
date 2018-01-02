@@ -226,6 +226,18 @@ namespace SFSQLiteApi
 
                 if (property != null)
                 {
+                    if (string.IsNullOrWhiteSpace(returnValue.ToString()))
+                    {
+                        if (property.PropertyType.IsNumber())
+                        {
+                            returnValue = 0;
+                        }
+                        else if (property.PropertyType.IsDateTime())
+                        {
+                            returnValue = DateTime.MinValue;
+                        }
+                    }
+
                     returnValue = Convert.ChangeType(returnValue, property.PropertyType);
                 }
             }

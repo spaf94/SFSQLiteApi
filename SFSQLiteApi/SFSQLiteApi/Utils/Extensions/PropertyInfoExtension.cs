@@ -1,7 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using SFSQLiteApi.Utils.Attributes;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace SFSQLiteApi.Utils
 {
@@ -16,7 +14,7 @@ namespace SFSQLiteApi.Utils
         /// </returns>
         public static bool IsDataMember(this PropertyInfo property)
         {
-            return (property.GetCustomAttributes(true).OfType<DataMemberAttribute>().Count() > 0);
+            return (property.GetCustomAttributes(typeof(TableColumnAttribute), true).Length > 0);
         }
 
         /// <summary>
@@ -28,7 +26,7 @@ namespace SFSQLiteApi.Utils
         /// </returns>
         public static bool IsKey(this PropertyInfo property)
         {
-            return (property.GetCustomAttributes(true).OfType<KeyAttribute>().Count() > 0);
+            return (property.GetCustomAttributes(typeof(TableKeyAttribute), true).Length > 0);
         }
     }
 }

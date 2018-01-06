@@ -21,6 +21,8 @@ namespace SFSQLiteApi.Utils.Log
         internal static void ActivateLog()
         {
             IsLogActive = true;
+            SFLog.Log.SetLogsFolderName("SFSQLiteLogs");
+            SFLog.Log.SetLogFileName("SFSQLiteLog");
         }
 
         /// <summary>

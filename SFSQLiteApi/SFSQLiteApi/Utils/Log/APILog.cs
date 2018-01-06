@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFLog.Enums;
+using System;
 
 namespace SFSQLiteApi.Utils.Log
 {
@@ -23,6 +24,7 @@ namespace SFSQLiteApi.Utils.Log
             IsLogActive = true;
             SFLog.Log.SetLogsFolderName("SFSQLiteLogs");
             SFLog.Log.SetLogFileName("SFSQLiteLog");
+            SFLog.Log.SetLogLevel(LogLevel.Debug);
         }
 
         /// <summary>

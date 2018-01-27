@@ -26,6 +26,8 @@ namespace SFSQLiteApiTestApp
 
         #endregion Constructor
 
+        #region SFSQLiteConnection
+
         #region 1 - Initialize Api
 
         private void buttonInitApi_Click(object sender, EventArgs e)
@@ -296,5 +298,42 @@ namespace SFSQLiteApiTestApp
         }
 
         #endregion Log
+
+        #endregion SFSQLiteConnection
+
+        #region SFSQLiteTool
+
+        private void buttonGetKeyValueList_Click(object sender, EventArgs e)
+        {
+            Person p = new Person();
+            var list = SFSQLiteTool.GetKeyValueList(p);
+
+            StringBuilder sbList = new StringBuilder();
+
+            foreach (object item in list)
+            {
+                sbList.AppendLine(item.ToString());
+            }
+
+            MessageBox.Show(sbList.ToString());
+        }
+
+        private void buttonGetKeyValueString_Click(object sender, EventArgs e)
+        {
+            Person p = new Person();
+            string key = SFSQLiteTool.GetKeyValueString(p);
+
+            MessageBox.Show(key);
+        }
+
+        private void buttonGetTableName_Click(object sender, EventArgs e)
+        {
+            Person p = new Person();
+            string table = SFSQLiteTool.GetTableName(p);
+
+            MessageBox.Show(table);
+        }
+
+        #endregion SFSQLiteTool
     }
 }

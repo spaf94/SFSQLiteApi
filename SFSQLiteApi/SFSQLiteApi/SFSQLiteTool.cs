@@ -1,6 +1,6 @@
 ﻿using SFSQLiteApi.Utils;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -8,6 +8,8 @@ namespace SFSQLiteApi
 {
     public static class SFSQLiteTool
     {
+        #region Public Methods
+
         /// <summary>
         /// Gets the key value list.
         /// </summary>
@@ -16,16 +18,12 @@ namespace SFSQLiteApi
         public static List<object> GetKeyValueList(object obj)
         {
             List<object> keyValueList = new List<object>();
-            Type objectType = obj.GetType();
-            var propertyList = objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var propertyList = GetPropertyKeyList(obj);
 
             foreach (PropertyInfo property in propertyList)
             {
-                if (property.IsKey())
-                {
-                    object value = property.GetValue(obj, null);
-                    keyValueList.Add(value);
-                }
+                object value = property.GetValue(obj, null);
+                keyValueList.Add(value);
             }
 
             return keyValueList;
@@ -39,17 +37,13 @@ namespace SFSQLiteApi
         public static string GetKeyValueString(object obj)
         {
             StringBuilder sbKeyValues = new StringBuilder();
-            Type objectType = obj.GetType();
-            var propertyList = objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var propertyList = GetPropertyKeyList(obj);
 
             foreach (PropertyInfo property in propertyList)
             {
-                if (property.IsKey())
-                {
-                    object value = property.GetValue(obj, null);
-                    sbKeyValues.Append(value.ToString());
-                    sbKeyValues.Append(", ");
-                }
+                object value = property.GetValue(obj, null);
+                sbKeyValues.Append(value.ToString());
+                sbKeyValues.Append(", ");
             }
 
             sbKeyValues.Remove((sbKeyValues.Length - 2), 2);
@@ -71,5 +65,22 @@ namespace SFSQLiteApi
 
             return (string.Empty);
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        /// Gets the property key list.
+        /// </summary>
+        /// <param name="objectType">Type of the object.</param>
+        /// <returns></returns>
+        private static List<PropertyInfo> GetPropertyKeyList(object obj)
+        {
+            var propertyList = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+            return (propertyList.Where(x => x.IsKey()).ToList());
+        }
+
+        #endregion Private Methods
     }
 }

@@ -43,11 +43,20 @@
             this.buttonGetColumnMaxValue = new System.Windows.Forms.Button();
             this.buttonActivateLogs = new System.Windows.Forms.Button();
             this.buttonDeactivateLogs = new System.Windows.Forms.Button();
+            this.buttonGetKeyValueList = new System.Windows.Forms.Button();
+            this.buttonGetKeyValueString = new System.Windows.Forms.Button();
+            this.buttonGetTableName = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageSFSQLiteConnection = new System.Windows.Forms.TabPage();
+            this.tabPageSFSQLiteTool = new System.Windows.Forms.TabPage();
+            this.tabControl1.SuspendLayout();
+            this.tabPageSFSQLiteConnection.SuspendLayout();
+            this.tabPageSFSQLiteTool.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonInitApi
             // 
-            this.buttonInitApi.Location = new System.Drawing.Point(13, 12);
+            this.buttonInitApi.Location = new System.Drawing.Point(6, 6);
             this.buttonInitApi.Name = "buttonInitApi";
             this.buttonInitApi.Size = new System.Drawing.Size(95, 23);
             this.buttonInitApi.TabIndex = 0;
@@ -57,7 +66,7 @@
             // 
             // textBoxDbName
             // 
-            this.textBoxDbName.Location = new System.Drawing.Point(102, 43);
+            this.textBoxDbName.Location = new System.Drawing.Point(96, 35);
             this.textBoxDbName.Name = "textBoxDbName";
             this.textBoxDbName.Size = new System.Drawing.Size(208, 20);
             this.textBoxDbName.TabIndex = 1;
@@ -66,7 +75,7 @@
             // labelDbName
             // 
             this.labelDbName.AutoSize = true;
-            this.labelDbName.Location = new System.Drawing.Point(12, 46);
+            this.labelDbName.Location = new System.Drawing.Point(6, 38);
             this.labelDbName.Name = "labelDbName";
             this.labelDbName.Size = new System.Drawing.Size(84, 13);
             this.labelDbName.TabIndex = 2;
@@ -74,7 +83,7 @@
             // 
             // buttonCreateDb
             // 
-            this.buttonCreateDb.Location = new System.Drawing.Point(12, 69);
+            this.buttonCreateDb.Location = new System.Drawing.Point(6, 61);
             this.buttonCreateDb.Name = "buttonCreateDb";
             this.buttonCreateDb.Size = new System.Drawing.Size(298, 23);
             this.buttonCreateDb.TabIndex = 3;
@@ -84,7 +93,7 @@
             // 
             // buttonCreateTable
             // 
-            this.buttonCreateTable.Location = new System.Drawing.Point(12, 98);
+            this.buttonCreateTable.Location = new System.Drawing.Point(6, 90);
             this.buttonCreateTable.Name = "buttonCreateTable";
             this.buttonCreateTable.Size = new System.Drawing.Size(298, 23);
             this.buttonCreateTable.TabIndex = 4;
@@ -94,7 +103,7 @@
             // 
             // buttonGetRowsTotal
             // 
-            this.buttonGetRowsTotal.Location = new System.Drawing.Point(12, 127);
+            this.buttonGetRowsTotal.Location = new System.Drawing.Point(6, 119);
             this.buttonGetRowsTotal.Name = "buttonGetRowsTotal";
             this.buttonGetRowsTotal.Size = new System.Drawing.Size(298, 23);
             this.buttonGetRowsTotal.TabIndex = 5;
@@ -104,7 +113,7 @@
             // 
             // buttonInsertRow
             // 
-            this.buttonInsertRow.Location = new System.Drawing.Point(13, 156);
+            this.buttonInsertRow.Location = new System.Drawing.Point(6, 148);
             this.buttonInsertRow.Name = "buttonInsertRow";
             this.buttonInsertRow.Size = new System.Drawing.Size(297, 23);
             this.buttonInsertRow.TabIndex = 6;
@@ -114,7 +123,7 @@
             // 
             // buttonUpdateRow
             // 
-            this.buttonUpdateRow.Location = new System.Drawing.Point(13, 185);
+            this.buttonUpdateRow.Location = new System.Drawing.Point(6, 177);
             this.buttonUpdateRow.Name = "buttonUpdateRow";
             this.buttonUpdateRow.Size = new System.Drawing.Size(297, 23);
             this.buttonUpdateRow.TabIndex = 7;
@@ -124,7 +133,7 @@
             // 
             // buttonDeleteRow
             // 
-            this.buttonDeleteRow.Location = new System.Drawing.Point(12, 214);
+            this.buttonDeleteRow.Location = new System.Drawing.Point(6, 206);
             this.buttonDeleteRow.Name = "buttonDeleteRow";
             this.buttonDeleteRow.Size = new System.Drawing.Size(298, 23);
             this.buttonDeleteRow.TabIndex = 8;
@@ -134,7 +143,7 @@
             // 
             // buttonSelectAllRows
             // 
-            this.buttonSelectAllRows.Location = new System.Drawing.Point(12, 243);
+            this.buttonSelectAllRows.Location = new System.Drawing.Point(6, 235);
             this.buttonSelectAllRows.Name = "buttonSelectAllRows";
             this.buttonSelectAllRows.Size = new System.Drawing.Size(298, 23);
             this.buttonSelectAllRows.TabIndex = 9;
@@ -144,7 +153,7 @@
             // 
             // buttonSelectOneRow
             // 
-            this.buttonSelectOneRow.Location = new System.Drawing.Point(12, 272);
+            this.buttonSelectOneRow.Location = new System.Drawing.Point(6, 264);
             this.buttonSelectOneRow.Name = "buttonSelectOneRow";
             this.buttonSelectOneRow.Size = new System.Drawing.Size(298, 23);
             this.buttonSelectOneRow.TabIndex = 10;
@@ -154,7 +163,7 @@
             // 
             // buttonCloseConnection
             // 
-            this.buttonCloseConnection.Location = new System.Drawing.Point(12, 330);
+            this.buttonCloseConnection.Location = new System.Drawing.Point(6, 322);
             this.buttonCloseConnection.Name = "buttonCloseConnection";
             this.buttonCloseConnection.Size = new System.Drawing.Size(298, 23);
             this.buttonCloseConnection.TabIndex = 11;
@@ -164,7 +173,7 @@
             // 
             // buttonGetColumnMaxValue
             // 
-            this.buttonGetColumnMaxValue.Location = new System.Drawing.Point(12, 301);
+            this.buttonGetColumnMaxValue.Location = new System.Drawing.Point(6, 293);
             this.buttonGetColumnMaxValue.Name = "buttonGetColumnMaxValue";
             this.buttonGetColumnMaxValue.Size = new System.Drawing.Size(298, 23);
             this.buttonGetColumnMaxValue.TabIndex = 12;
@@ -174,7 +183,7 @@
             // 
             // buttonActivateLogs
             // 
-            this.buttonActivateLogs.Location = new System.Drawing.Point(114, 12);
+            this.buttonActivateLogs.Location = new System.Drawing.Point(107, 6);
             this.buttonActivateLogs.Name = "buttonActivateLogs";
             this.buttonActivateLogs.Size = new System.Drawing.Size(95, 23);
             this.buttonActivateLogs.TabIndex = 13;
@@ -184,7 +193,7 @@
             // 
             // buttonDeactivateLogs
             // 
-            this.buttonDeactivateLogs.Location = new System.Drawing.Point(215, 12);
+            this.buttonDeactivateLogs.Location = new System.Drawing.Point(208, 6);
             this.buttonDeactivateLogs.Name = "buttonDeactivateLogs";
             this.buttonDeactivateLogs.Size = new System.Drawing.Size(95, 23);
             this.buttonDeactivateLogs.TabIndex = 14;
@@ -192,30 +201,97 @@
             this.buttonDeactivateLogs.UseVisualStyleBackColor = true;
             this.buttonDeactivateLogs.Click += new System.EventHandler(this.buttonDeactivateLogs_Click);
             // 
+            // buttonGetKeyValueList
+            // 
+            this.buttonGetKeyValueList.Location = new System.Drawing.Point(6, 6);
+            this.buttonGetKeyValueList.Name = "buttonGetKeyValueList";
+            this.buttonGetKeyValueList.Size = new System.Drawing.Size(298, 23);
+            this.buttonGetKeyValueList.TabIndex = 15;
+            this.buttonGetKeyValueList.Text = "Get Key Value List";
+            this.buttonGetKeyValueList.UseVisualStyleBackColor = true;
+            this.buttonGetKeyValueList.Click += new System.EventHandler(this.buttonGetKeyValueList_Click);
+            // 
+            // buttonGetKeyValueString
+            // 
+            this.buttonGetKeyValueString.Location = new System.Drawing.Point(6, 35);
+            this.buttonGetKeyValueString.Name = "buttonGetKeyValueString";
+            this.buttonGetKeyValueString.Size = new System.Drawing.Size(298, 23);
+            this.buttonGetKeyValueString.TabIndex = 16;
+            this.buttonGetKeyValueString.Text = "Get Key Value String";
+            this.buttonGetKeyValueString.UseVisualStyleBackColor = true;
+            this.buttonGetKeyValueString.Click += new System.EventHandler(this.buttonGetKeyValueString_Click);
+            // 
+            // buttonGetTableName
+            // 
+            this.buttonGetTableName.Location = new System.Drawing.Point(6, 64);
+            this.buttonGetTableName.Name = "buttonGetTableName";
+            this.buttonGetTableName.Size = new System.Drawing.Size(298, 23);
+            this.buttonGetTableName.TabIndex = 17;
+            this.buttonGetTableName.Text = "Get Table Name";
+            this.buttonGetTableName.UseVisualStyleBackColor = true;
+            this.buttonGetTableName.Click += new System.EventHandler(this.buttonGetTableName_Click);
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPageSFSQLiteConnection);
+            this.tabControl1.Controls.Add(this.tabPageSFSQLiteTool);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(322, 384);
+            this.tabControl1.TabIndex = 18;
+            // 
+            // tabPageSFSQLiteConnection
+            // 
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonDeactivateLogs);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonInitApi);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.textBoxDbName);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.labelDbName);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonCreateDb);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonActivateLogs);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonCreateTable);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonGetColumnMaxValue);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonGetRowsTotal);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonCloseConnection);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonInsertRow);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonSelectOneRow);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonUpdateRow);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonSelectAllRows);
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonDeleteRow);
+            this.tabPageSFSQLiteConnection.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSFSQLiteConnection.Name = "tabPageSFSQLiteConnection";
+            this.tabPageSFSQLiteConnection.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSFSQLiteConnection.Size = new System.Drawing.Size(314, 358);
+            this.tabPageSFSQLiteConnection.TabIndex = 0;
+            this.tabPageSFSQLiteConnection.Text = "SFSQLiteConnection";
+            this.tabPageSFSQLiteConnection.UseVisualStyleBackColor = true;
+            // 
+            // tabPageSFSQLiteTool
+            // 
+            this.tabPageSFSQLiteTool.Controls.Add(this.buttonGetKeyValueList);
+            this.tabPageSFSQLiteTool.Controls.Add(this.buttonGetTableName);
+            this.tabPageSFSQLiteTool.Controls.Add(this.buttonGetKeyValueString);
+            this.tabPageSFSQLiteTool.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSFSQLiteTool.Name = "tabPageSFSQLiteTool";
+            this.tabPageSFSQLiteTool.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageSFSQLiteTool.Size = new System.Drawing.Size(314, 358);
+            this.tabPageSFSQLiteTool.TabIndex = 1;
+            this.tabPageSFSQLiteTool.Text = "SFSQLiteTool";
+            this.tabPageSFSQLiteTool.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 363);
-            this.Controls.Add(this.buttonDeactivateLogs);
-            this.Controls.Add(this.buttonActivateLogs);
-            this.Controls.Add(this.buttonGetColumnMaxValue);
-            this.Controls.Add(this.buttonCloseConnection);
-            this.Controls.Add(this.buttonSelectOneRow);
-            this.Controls.Add(this.buttonSelectAllRows);
-            this.Controls.Add(this.buttonDeleteRow);
-            this.Controls.Add(this.buttonUpdateRow);
-            this.Controls.Add(this.buttonInsertRow);
-            this.Controls.Add(this.buttonGetRowsTotal);
-            this.Controls.Add(this.buttonCreateTable);
-            this.Controls.Add(this.buttonCreateDb);
-            this.Controls.Add(this.labelDbName);
-            this.Controls.Add(this.textBoxDbName);
-            this.Controls.Add(this.buttonInitApi);
+            this.ClientSize = new System.Drawing.Size(349, 411);
+            this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "SFSQLiteApi Test App";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageSFSQLiteConnection.ResumeLayout(false);
+            this.tabPageSFSQLiteConnection.PerformLayout();
+            this.tabPageSFSQLiteTool.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -236,6 +312,12 @@
         private System.Windows.Forms.Button buttonGetColumnMaxValue;
         private System.Windows.Forms.Button buttonActivateLogs;
         private System.Windows.Forms.Button buttonDeactivateLogs;
+        private System.Windows.Forms.Button buttonGetKeyValueList;
+        private System.Windows.Forms.Button buttonGetKeyValueString;
+        private System.Windows.Forms.Button buttonGetTableName;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPageSFSQLiteConnection;
+        private System.Windows.Forms.TabPage tabPageSFSQLiteTool;
     }
 }
 

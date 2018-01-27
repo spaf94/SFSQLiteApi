@@ -85,7 +85,6 @@ namespace SFSQLiteApi
 
                 var objectType = typeof(T);
                 var propertyList = objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-                int propertiesCount = propertyList.Length;
 
                 StringBuilder sbCreateTable = new StringBuilder();
                 sbCreateTable.Append("CREATE TABLE IF NOT EXISTS ");

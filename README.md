@@ -37,3 +37,7 @@ Added new features to the API:
 - Possibility of activate or deactivate logs;
 - Log of the executed commands, queries, possible errors and exceptions in the API;
 - Improvements and fixes;
+
+### 1.18.1.29
+- Updated log library;
+- Performance improvements;

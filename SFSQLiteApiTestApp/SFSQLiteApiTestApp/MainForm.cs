@@ -15,6 +15,8 @@ namespace SFSQLiteApiTestApp
         //Global object SFSQLite to use in all app
         private SFSQLite DbTest = null;
 
+        
+
         #endregion Members
 
         #region Constructor
@@ -51,8 +53,8 @@ namespace SFSQLiteApiTestApp
         {
             try
             {
-                DbTest = new SFSQLite(textBoxDbName.Text);
-                DbTest.OpenConnection();
+                this.DbTest = new SFSQLite("TestDB");
+                this.DbTest.OpenConnection();
                 MessageBox.Show("OK");
             }
             catch (Exception exception)

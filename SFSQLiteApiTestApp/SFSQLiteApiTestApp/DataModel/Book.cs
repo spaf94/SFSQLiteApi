@@ -6,8 +6,12 @@ using System.Text;
 
 namespace SFSQLiteApiTestApp.DataModel
 {
-    public class Author
+    public class Book
     {
+        [TableKey]
+        [TableColumn] 
+        public int BookId { get; set; }
+
         [TableKey]
         [TableColumn]
         public int AuthorId { get; set; }
@@ -16,7 +20,7 @@ namespace SFSQLiteApiTestApp.DataModel
         public string Name { get; set; }
 
         [TableColumn]
-        public DateTime BirthDate { get; set; } 
+        public DateTime PublishDate { get; set; }
     }
 }
 

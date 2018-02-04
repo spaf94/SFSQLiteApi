@@ -70,17 +70,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="SQLiteDll\SQLite.Interop.dll_x64.gz" />
+    <EmbeddedResource Include="SQLiteDll\SQLite.Interop.dll_x86.gz" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SQLiteDll\System.Data.SQLite.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Utils\Log\SFLog.dll" />

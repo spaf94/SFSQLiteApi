@@ -86,7 +86,7 @@ namespace SFSQLiteApi
                     string fileName = string.Empty;
                     Stream stream = assembly.GetManifestResourceStream(resource);
 
-                    if (resource.Contains(Constant.x64))
+                    if (resource.Contains(Constant.SQLiteInteropDllGzX64))
                     {
                         string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constant.x64);
 
@@ -95,9 +95,9 @@ namespace SFSQLiteApi
                             Directory.CreateDirectory(filePath);
                         }
 
-                        fileName = Path.Combine(filePath, Constant.SQLiteInteropDll);
+                        fileName = Path.Combine(filePath, Constant.SQLiteInteropDllGzX64);
                     }
-                    else if (resource.Contains(Constant.x86))
+                    else if (resource.Contains(Constant.SQLiteInteropDllGzX86))
                     {
                         string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constant.x86);
 
@@ -106,7 +106,7 @@ namespace SFSQLiteApi
                             Directory.CreateDirectory(filePath);
                         }
 
-                        fileName = Path.Combine(filePath, Constant.SQLiteInteropDll);
+                        fileName = Path.Combine(filePath, Constant.SQLiteInteropDllGzX86);
                     }
 
                     if (!File.Exists(fileName))
@@ -115,6 +115,9 @@ namespace SFSQLiteApi
                         {
                             Utility.CopyStream(stream, file);
                         }
+
+                        Utility.DecompressGZip(fileName, Constant.SQLiteInteropDll);
+                        File.Delete(fileName);
                     }
                 }
             }

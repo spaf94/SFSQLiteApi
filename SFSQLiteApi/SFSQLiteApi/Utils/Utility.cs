@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Reflection;
 
 namespace SFSQLiteApi.Utils
@@ -20,6 +21,31 @@ namespace SFSQLiteApi.Utils
             while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
             {
                 output.Write(buffer, 0, len);
+            }
+        }
+
+        /// <summary>
+        /// Decompresses the g zip.
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        public static void DecompressGZip(string gzipFileName, string fileName)
+        {
+            FileInfo fileInfo = new FileInfo(gzipFileName);
+
+            if (fileInfo != null)
+            {
+                using (FileStream fileStream = fileInfo.OpenRead())
+                {
+                    fileName = Path.Combine(fileInfo.DirectoryName, fileName);
+
+                    using (FileStream outFileStream = File.Create(fileName))
+                    {
+                        using (GZipStream gzipStream = new GZipStream(fileStream, CompressionMode.Decompress))
+                        {
+                            gzipStream.CopyTo(outFileStream);
+                        }
+                    }
+                }
             }
         }
 

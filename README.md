@@ -24,7 +24,7 @@ The idea is that you create your data model with objects (each table is a class)
 If you find any bugs, please submit an [issue](https://github.com/spaf94/SFSQLiteApi/issues/new/).
 
 ## How to use
-Check the source code of the app test.
+Read the [wiki page](https://github.com/spaf94/SFSQLiteApi/wiki) or check the source code of the test app.
 
 ## Releases
 

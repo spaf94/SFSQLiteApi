@@ -27,17 +27,4 @@ If you find any bugs, please submit an [issue](https://github.com/spaf94/SFSQLit
 Read the [wiki page](https://github.com/spaf94/SFSQLiteApi/wiki) or check the source code of the test app.
 
 ## Releases
-
-### 1.17.12.23
-First API version with the most of the features described above.
-
-### 1.18.1.6
-Added new features to the API:
-- Added method GetColumnMaxValue to get the max value from a table column;
-- Possibility of activate or deactivate logs;
-- Log of the executed commands, queries, possible errors and exceptions in the API;
-- Improvements and fixes;
-
-### 1.18.1.29
-- Updated log library;
-- Performance improvements;
+Read the [Releases](https://github.com/spaf94/SFSQLiteApi/wiki) page to check new versions and news.

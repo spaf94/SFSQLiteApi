@@ -1,10 +1,11 @@
-﻿using SFSQLiteApi;
-using SFSQLiteApiTestApp.DataModel;
+﻿using SFSQLiteApiTestApp.DataModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
+
+    using SFSQLiteApi;
 
 namespace SFSQLiteApiTestApp
 {
@@ -12,10 +13,7 @@ namespace SFSQLiteApiTestApp
     {
         #region Members
 
-        //Global object SFSQLite to use in all app
-        private SFSQLite DbTest = null;
-
-        
+        private SFSQLite DbTest { get; set; }
 
         #endregion Members
 
@@ -55,6 +53,7 @@ namespace SFSQLiteApiTestApp
             {
                 this.DbTest = new SFSQLite("TestDB");
                 this.DbTest.OpenConnection();
+
                 MessageBox.Show("OK");
             }
             catch (Exception exception)
@@ -71,8 +70,9 @@ namespace SFSQLiteApiTestApp
         {
             try
             {
-                //Creates the Person table according to the properties and attributes of the object
-                this.DbTest.CreateTable<Person>();
+                this.DbTest.CreateTable<Author>();
+                this.DbTest.CreateTable<Book>();
+
                 MessageBox.Show("OK");
             }
             catch (Exception exception)
@@ -107,6 +107,14 @@ namespace SFSQLiteApiTestApp
 
         private void buttonInsertRow_Click(object sender, EventArgs e)
         {
+            Author author = new Author();
+            author.AuthorId = 1;
+            author.BirthDate = new DateTime(1970,3,3);
+            author.Name = "John Adams";
+
+            this.DbTest.InsertRow(author);
+
+            /*
             //For example, gets a new a Id
             int newId = (int)this.DbTest.GetColumnMaxValue<Person>("PersonId") + 1;
 
@@ -133,6 +141,7 @@ namespace SFSQLiteApiTestApp
                     MessageBox.Show("INSERT ERROR");
                 }
             }
+            */
         }
 
         #endregion 5 - Insert Row
@@ -141,6 +150,18 @@ namespace SFSQLiteApiTestApp
 
         private void buttonUpdateRow_Click(object sender, EventArgs e)
         {
+
+            Author author = new Author();
+            author.AuthorId = 1;
+            author.BirthDate = new DateTime(1975, 5, 5);
+            author.Name = "John Adams Updated";
+
+            this.DbTest.UpdateRow(author);
+
+            string where = "AuthorId = 1";
+            this.DbTest.UpdateRow(author, where);
+
+            /*
             //For example, lets update the the person 1
             Person person = new Person();
             person.PersonId = 1; //PersonId 1
@@ -168,6 +189,7 @@ namespace SFSQLiteApiTestApp
             {
                 MessageBox.Show(string.Format("Person {0} don't exists in the database!", person.PersonId));
             }
+            */
         }
 
         #endregion 6 - Update Row

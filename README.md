@@ -27,4 +27,4 @@ If you find any bugs, please submit an [issue](https://github.com/spaf94/SFSQLit
 Read the [wiki page](https://github.com/spaf94/SFSQLiteApi/wiki) or check the source code of the test app.
 
 ## Releases
-Read the [Releases](https://github.com/spaf94/SFSQLiteApi/wiki) page to check new versions and news.
+Read the [Releases](https://github.com/spaf94/SFSQLiteApi/wiki/Releases) page to check new versions and news.

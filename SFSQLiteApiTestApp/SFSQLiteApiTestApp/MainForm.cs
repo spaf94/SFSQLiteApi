@@ -87,6 +87,12 @@ namespace SFSQLiteApiTestApp
 
         private void buttonGetRowsTotal_Click(object sender, EventArgs e)
         {
+            int allTotal = this.DbTest.GetRowsTotal<Author>();
+
+            string where = "AuthorId > 1";
+            int whereTotal = this.DbTest.GetRowsTotal<Author>(where);
+
+            /*
             int totalA = 0;
             int totalB = 0;
             string where = string.Empty;
@@ -99,6 +105,7 @@ namespace SFSQLiteApiTestApp
             totalB = (int)this.DbTest.GetRowsTotal<Person>(where);
 
             MessageBox.Show(string.Format("Total without where: {0} \n Total with where: {1}", totalA, totalB));
+            */
         }
 
         #endregion 4 - Get Rows Total
@@ -198,18 +205,15 @@ namespace SFSQLiteApiTestApp
 
         private void buttonDeleteRow_Click(object sender, EventArgs e)
         {
+            Author author = new Author();
+            author.AuthorId = 1;
+
+            this.DbTest.DeleteRow(author);
+
+            /*
             //For example, lets delete the the person 1
             Person person = new Person();
             person.PersonId = 1; //PersonId 1
-
-            /*
-            person.Name = "Updated Name";
-            person.Address = "Updated Address";
-            person.BirthDate = new DateTime(1994, 6, 24);
-            person.IsValid = false;
-            */
-
-            string where = string.Format("PersonId={0}", person.PersonId);
 
             //Delete the object from the database
             if (this.DbTest.DeleteRow(person) > 0)
@@ -220,6 +224,7 @@ namespace SFSQLiteApiTestApp
             {
                 MessageBox.Show("ERROR OR OBJECT NOT FOUND");
             }
+            */
         }
 
         #endregion 7 - Delete Row
@@ -228,6 +233,12 @@ namespace SFSQLiteApiTestApp
 
         private void buttonSelectAllRows_Click(object sender, EventArgs e)
         {
+            List<Person> allPersonList = this.DbTest.SelectAllRows<Person>();
+
+            string where = "AuthorId > 1";
+            List<Person> wherePersonList = this.DbTest.SelectAllRows<Person>(where);
+
+            /*
             //Select all persons from database without where clause
             var personList = this.DbTest.SelectAllRows<Person>();
             this.ShowPersonListInfo(personList);
@@ -236,6 +247,7 @@ namespace SFSQLiteApiTestApp
             string where = "PersonId > 3";
             personList = this.DbTest.SelectAllRows<Person>(where);
             this.ShowPersonListInfo(personList);
+            */
         }
 
         #endregion 8 - Select All Rows
@@ -244,10 +256,15 @@ namespace SFSQLiteApiTestApp
 
         private void buttonSelectOneRow_Click(object sender, EventArgs e)
         {
+            string where = "AuthorId = 1";
+            Person person = this.DbTest.SelectOneRow<Person>(where);
+
+            /*
             //Selects the person id 3 from database
             string where = "PersonId = 3";
             var person = this.DbTest.SelectOneRow<Person>(where);
             this.ShowPersonInfo(person);
+            */
         }
 
         #endregion 9 - Select One Row
@@ -256,12 +273,17 @@ namespace SFSQLiteApiTestApp
 
         private void buttonGetColumnMaxValue_Click(object sender, EventArgs e)
         {
+            int maxAuthorId = (int)this.DbTest.GetColumnMaxValue<Author>("AuthorId");
+            DateTime maxBirthDate = (DateTime)this.DbTest.GetColumnMaxValue<Author>("BirthDate");
+
+            /*
             //Gets max PersonId - Necessary the cast to Int32 type
             int maxPersonId = (int)this.DbTest.GetColumnMaxValue<Person>("PersonId");
             //Gets max BirthDate - necessary the cast to DateTime type
             DateTime maxBirthDate = (DateTime)this.DbTest.GetColumnMaxValue<Person>("BirthDate");
 
             MessageBox.Show(string.Format("Max PersonId: {0} | Max BirthDate: {1}", maxPersonId, maxBirthDate));
+            */
         }
 
         #endregion 10 - Get Column Max Value

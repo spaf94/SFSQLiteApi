@@ -66,12 +66,14 @@ namespace SFSQLiteApi.Utils
         /// <param name="tableName">Name of the table.</param>
         /// <param name="byteArrayColumn">The byte array column.</param>
         /// <param name="byteArray">The byte array.</param>
+        /// <param name="where">The where.</param>
         /// <param name="connection">The connection.</param>
         /// <returns></returns>
         public static int InsertUpdateByteArray(
             string tableName,
             string byteArrayColumn,
             byte[] byteArray,
+            string where,
             SQLiteConnection connection)
         {
             if (byteArray != null)
@@ -82,6 +84,8 @@ namespace SFSQLiteApi.Utils
                 byteArrayQuery.Append(" SET ");
                 byteArrayQuery.Append(byteArrayColumn);
                 byteArrayQuery.Append("=@img");
+                byteArrayQuery.Append(" WHERE");
+                byteArrayQuery.Append(where);
 
                 using (var command = new SQLiteCommand(connection))
                 {

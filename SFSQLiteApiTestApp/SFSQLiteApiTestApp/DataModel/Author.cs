@@ -16,7 +16,13 @@ namespace SFSQLiteApiTestApp.DataModel
         public string Name { get; set; }
 
         [TableColumn]
-        public DateTime BirthDate { get; set; } 
+        public DateTime BirthDate { get; set; }
+
+        [TableColumn]
+        public byte[] ArrayA { get; set; }
+
+        [TableColumn]
+        public byte[] ArrayB { get; set; }
     }
 }
 

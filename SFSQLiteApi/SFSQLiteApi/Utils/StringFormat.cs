@@ -1,14 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SFSQLiteApi.Utils
+﻿namespace SFSQLiteApi.Utils
 {
-    public static class StringFormat
+    internal static class StringFormat
     {
+        /// <summary>
+        /// The connection string
+        /// </summary>
         public static string ConnectionString = "Data Source={0}.sqlite;Version=3;";
+
+        /// <summary>
+        /// The log message
+        /// </summary>
         public static string LogMessage = "[SFSQLiteApi] ==> {0} ";
+
+        /// <summary>
+        /// The SQL insert
+        /// </summary>
+        public static string SqlInsert = "INSERT INTO {0}({1}) VALUES({2})";
     }
 }

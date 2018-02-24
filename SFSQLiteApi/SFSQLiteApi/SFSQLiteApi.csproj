@@ -58,6 +58,7 @@
     <Compile Include="Utils\Attributes\TableColumnAttribute.cs" />
     <Compile Include="Utils\Attributes\TableKeyAttribute.cs" />
     <Compile Include="Utils\Constant.cs" />
+    <Compile Include="Utils\DataModel\InsertObject.cs" />
     <Compile Include="Utils\EmbeddedAssembly.cs" />
     <Compile Include="Utils\Extensions\ObjectExtension.cs" />
     <Compile Include="Utils\Extensions\PropertyInfoExtension.cs" />

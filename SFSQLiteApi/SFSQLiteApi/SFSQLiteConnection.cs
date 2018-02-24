@@ -1,4 +1,5 @@
 ﻿using SFSQLiteApi.Utils;
+using SFSQLiteApi.Utils.DataModel;
 using SFSQLiteApi.Utils.Log;
 using System;
 using System.Collections.Generic;
@@ -295,84 +296,32 @@ namespace SFSQLiteApi
         /// </summary>
         /// <param name="insertObj">The insert object.</param>
         /// <returns></returns>
-        public int InsertRow(object insertObj)
+        public int InsertRow(object obj)
         {
-            int aux = 1;
-            var keyColumnList = new List<string>();
-            var byteArrayColumnList = new List<string>();
-            var byteArrayList = new List<byte[]>();
+            int result = 0;
+            InsertObject insertObject = null;
+            string sqlInsert = null;
 
-            var objectType = insertObj.GetType();
-            var propertyList = objectType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            int propertiesCount = propertyList.Length;
-
-            StringBuilder insertQuery = new StringBuilder();
-            insertQuery.Append("INSERT INTO ");
-            insertQuery.Append(objectType.Name);
-            insertQuery.Append("(");
-
-            foreach (var property in propertyList)
+            try
             {
-                if (property.IsDataMember())
+                insertObject = new InsertObject(obj);
+                sqlInsert = string.Format(StringFormat.SqlInsert, insertObject.Table, insertObject.Columns, insertObject.Values);
+
+                result = SQLiteQuery.ExecuteNonQuery(sqlInsert, this.Connection);
+
+                if (result > 0)
                 {
-                    insertQuery.Append(property.Name);
-
-                    if (aux < propertiesCount)
-                    {
-                        insertQuery.Append(",");
-                    }
-
-                    aux++;
+                    this.HandleByteArrayList(insertObject.Table, insertObject.ByteArrayColumns, insertObject.ByteArrayValues, insertObject.KeyString);
                 }
             }
-
-            if (insertQuery.ToString().EndsWith(","))
+            catch (Exception exception)
             {
-                insertQuery.Remove((insertQuery.Length - 1), 1);
+                APILog.Error(this, "InsertRow", exception);
             }
-
-            insertQuery.Append(") VALUES(");
-            aux = 1;
-
-            foreach (var property in propertyList)
+            finally
             {
-                if (property.IsDataMember())
-                {
-                    object value = property.GetValue(insertObj, null);
-                    value = Utility.GetValue(byteArrayColumnList, byteArrayList, property, value);
-
-                    if (value == null)
-                    {
-                        insertQuery.Append("NULL");
-                    }
-                    else
-                    {
-                        insertQuery.Append("'");
-                        insertQuery.Append(value.ToString());
-                        insertQuery.Append("'");
-                    }
-
-                    if (aux < propertiesCount)
-                    {
-                        insertQuery.Append(",");
-                    }
-                }
-
-                aux++;
-            }
-
-            if (insertQuery.ToString().EndsWith(","))
-            {
-                insertQuery.Remove((insertQuery.Length - 1), 1);
-            }
-
-            insertQuery.Append(")");
-
-            int result = SQLiteQuery.ExecuteNonQuery(insertQuery.ToString(), this.Connection);
-
-            if (result > 0)
-            {
-                this.HandleByteArrayList(objectType.Name, byteArrayColumnList, byteArrayList);
+                insertObject = null;
+                sqlInsert = null;
             }
 
             return result;
@@ -543,7 +492,7 @@ namespace SFSQLiteApi
 
             if (result > 0)
             {
-                this.HandleByteArrayList(objectType.Name, byteArrayColumnList, byteArrayList);
+                this.HandleByteArrayList(objectType.Name, byteArrayColumnList, byteArrayList, null);
             }
 
             return result;
@@ -573,11 +522,12 @@ namespace SFSQLiteApi
         /// <param name="tableName">Name of the table.</param>
         /// <param name="byteArrayColumnList">The byte array column list.</param>
         /// <param name="byteArrayList">The byte array list.</param>
-        private void HandleByteArrayList(string tableName, List<string> byteArrayColumnList, List<byte[]> byteArrayList)
+        /// <param name="where">The where.</param>
+        private void HandleByteArrayList(string tableName, List<string> byteArrayColumnList, List<byte[]> byteArrayList, string where)
         {
             for (int i = 0; i < byteArrayColumnList.Count; i++)
             {
-                SQLiteQuery.InsertUpdateByteArray(tableName, byteArrayColumnList[i], byteArrayList[i], this.Connection);
+                SQLiteQuery.InsertUpdateByteArray(tableName, byteArrayColumnList[i], byteArrayList[i], where, this.Connection);
             }
         }
 

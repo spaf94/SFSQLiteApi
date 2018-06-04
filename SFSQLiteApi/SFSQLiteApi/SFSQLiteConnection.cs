@@ -292,6 +292,27 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Inserts the list.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectList">The object list.</param>
+        /// <returns></returns>
+        public bool InsertList<T>(List<T> objectList)
+        {
+            bool result = true;
+
+            foreach (T item in objectList)
+            {
+                if (this.InsertRow(item) <= 0)
+                {
+                    result = false;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Inserts the row.
         /// </summary>
         /// <param name="insertObj">The insert object.</param>

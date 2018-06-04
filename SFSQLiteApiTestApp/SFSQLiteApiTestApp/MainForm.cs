@@ -390,5 +390,24 @@ namespace SFSQLiteApiTestApp
         }
 
         #endregion SFSQLiteTool
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Author> list = new List<Author>();
+            int id = (int)this.DbTest.GetColumnMaxValue<Author>("AuthorId");
+
+            for (int i = 1; i < 4; i++)
+            {
+                Author a = new Author();
+                a.ArrayA = new byte[] { 1, 2, 3, 4, 5 };
+                a.AuthorId = id + i;
+                a.BirthDate = DateTime.Now;
+                a.Name = "Author" + a.AuthorId.ToString();
+
+                list.Add(a);
+            }
+
+            bool res = this.DbTest.InsertList<Author>(list);
+        }
     }
 }

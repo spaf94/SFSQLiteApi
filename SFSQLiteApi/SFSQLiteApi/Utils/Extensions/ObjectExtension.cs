@@ -199,5 +199,23 @@ namespace SFSQLiteApi.Utils
 
             return byteArrayValues;
         }
+
+        /// <summary>
+        /// Gets the byte array values.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <param name="size">The size.</param>
+        /// <returns></returns>
+        public static List<byte[]> GetByteArrayValues(this object obj, int size)
+        {
+            if (size == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return obj.GetByteArrayValues();
+            }
+        }
     }
 }

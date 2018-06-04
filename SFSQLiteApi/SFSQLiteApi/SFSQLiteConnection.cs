@@ -304,7 +304,7 @@ namespace SFSQLiteApi
 
             try
             {
-                insertObject = new InsertObject(obj);
+                insertObject = InsertObject.CreateInstance(obj);
                 sqlInsert = string.Format(StringFormat.SqlInsert, insertObject.Table, insertObject.Columns, insertObject.Values);
 
                 result = SQLiteQuery.ExecuteNonQuery(sqlInsert, this.Connection);

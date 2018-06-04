@@ -115,13 +115,20 @@ namespace SFSQLiteApiTestApp
         private void buttonInsertRow_Click(object sender, EventArgs e)
         {
             Author author = new Author();
-            author.AuthorId = 2;
+            author.AuthorId = 3;
             author.BirthDate = new DateTime(1970,3,3);
             author.Name = "John Adams";
             author.ArrayA = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            //author.ArrayB = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
             this.DbTest.InsertRow(author);
+
+            Author author2 = new Author();
+            author2.AuthorId = 4;
+            author2.BirthDate = new DateTime(1970, 3, 3);
+            author2.Name = "John Adams 2";
+            author2.ArrayA = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            this.DbTest.InsertRow(author2);
 
             /*
             //For example, gets a new a Id

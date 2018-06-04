@@ -56,22 +56,41 @@ namespace SFSQLiteApi.Utils.DataModel
 
         #endregion Properties
 
-        #region Constructor
+        #region Public Methods
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InsertObject"/> class.
+        /// Creates the instance.
         /// </summary>
         /// <param name="obj">The object.</param>
-        public InsertObject(object obj)
+        /// <returns></returns>
+        internal static InsertObject CreateInstance(object obj)
         {
-            this.Table = obj.GetName();
-            this.Columns = obj.GetColumns();
-            this.Values = obj.GetValues();
-            this.ByteArrayColumns = obj.GetByteArrayColumns();
-            this.ByteArrayValues = obj.GetByteArrayValues();
-            this.KeyString = obj.GetKeyString();
+            string table = obj.GetName();
+            InsertObject insertObject = null;
+
+            if (Cache.InsertObjectList.ContainsKey(table))
+            {
+                insertObject = Cache.InsertObjectList[table];
+                insertObject.Values = obj.GetValues();
+                insertObject.ByteArrayValues = obj.GetByteArrayValues(insertObject.ByteArrayColumns.Count);
+                insertObject.KeyString = obj.GetKeyString();
+            }
+            else
+            {
+                insertObject = new InsertObject();
+                insertObject.Table = table;
+                insertObject.Columns = obj.GetColumns();
+                insertObject.Values = obj.GetValues();
+                insertObject.ByteArrayColumns = obj.GetByteArrayColumns();
+                insertObject.ByteArrayValues = obj.GetByteArrayValues(insertObject.ByteArrayColumns.Count);
+                insertObject.KeyString = obj.GetKeyString();
+
+                Cache.InsertObjectList.Add(insertObject.Table, insertObject);
+            }
+
+            return insertObject;
         }
 
-        #endregion Constructor
+        #endregion
     }
 }

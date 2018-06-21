@@ -1,6 +1,6 @@
 # SFSQLiteApi
 
-SFSQLiteApi is an C# library to manage SQLite databases in a easy way in your C# projects.
+SFSQLiteApi is an .NET library to manage SQLite databases in a easy way in your .NET projects.
 The idea is that you create your data model with objects (each table is a class) and the heavy SQL work is made by the API.
 
 ## ​Features
@@ -21,10 +21,10 @@ The idea is that you create your data model with objects (each table is a class)
 - Activate or deactivate logs
 
 ## Issues
-If you find any bugs, please submit an [issue](https://github.com/spaf94/SFSQLiteApi/issues/new/).
+If you find any bugs, please submit an [issue](https://github.com/spaf94/dotnet-sf-sqlite/issues/new/).
 
 ## How to use
-Read the [wiki page](https://github.com/spaf94/SFSQLiteApi/wiki) or check the source code of the test app.
+Read the [wiki page](https://github.com/spaf94/dotnet-sf-sqlite/wiki) or check the source code of the test app.
 
 ## Releases
-Read the [Releases](https://github.com/spaf94/SFSQLiteApi/wiki/Releases) page to check new versions and news.
+Read the [Releases](https://github.com/spaf94/dotnet-sf-sqlite/wiki/Releases) page to check new versions and news.

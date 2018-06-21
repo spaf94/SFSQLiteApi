@@ -214,6 +214,7 @@ namespace SFSQLiteApi
         /// <typeparam name="T"></typeparam>
         /// <param name="objectList">The object list.</param>
         /// <returns></returns>
+        /*
         public bool InsertList<T>(List<T> objectList)
         {
             if (this.Connection != null)
@@ -226,6 +227,7 @@ namespace SFSQLiteApi
                 return false;
             }
         }
+        */
 
         /// <summary>
         /// Inserts the row.

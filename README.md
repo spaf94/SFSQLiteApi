@@ -27,4 +27,4 @@ If you find any bugs, please submit an [issue](https://github.com/spaf94/dotnet-
 Read the [wiki page](https://github.com/spaf94/dotnet-sf-sqlite/wiki) or check the source code of the test app.
 
 ## Releases
-Read the [Releases](https://github.com/spaf94/dotnet-sf-sqlite/wiki/Releases) page to check new versions and news.
+Read the [Releases](https://github.com/spaf94/dotnet-sf-sqlite/releases) page to check new versions and news.

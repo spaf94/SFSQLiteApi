@@ -153,6 +153,24 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Deletes all.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public bool DeleteAll<T>()
+        {
+            if (this.Connection != null)
+            {
+                return (this.Connection.DeleteAll<T>());
+            }
+            else
+            {
+                this.ThrowConnectionException();
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Deletes the list.
         /// </summary>
         /// <typeparam name="T"></typeparam>

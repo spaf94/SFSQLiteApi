@@ -151,6 +151,19 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Deletes all.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public bool DeleteAll<T>()
+        {
+            var objectType = typeof(T);
+            string sqlQuery = string.Format("DELETE FROM {0}", objectType.Name);
+
+            return (SQLiteQuery.ExecuteNonQuery(sqlQuery, this.Connection) > 0);
+        }
+
+        /// <summary>
         /// Deletes the list.
         /// </summary>
         /// <typeparam name="T"></typeparam>

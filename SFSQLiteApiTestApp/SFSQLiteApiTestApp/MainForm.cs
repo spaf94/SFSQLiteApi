@@ -415,5 +415,11 @@ namespace SFSQLiteApiTestApp
             List<Author> list = this.DbTest.SelectAllRows<Author>();
             bool res = this.DbTest.UpdateList<Author>(list);
         }
+
+        private void buttonDeleteList_Click(object sender, EventArgs e)
+        {
+            List<Author> list = this.DbTest.SelectAllRows<Author>("AuthorId<4");
+            bool res = this.DbTest.UpdateList<Author>(list);
+        }
     }
 }

@@ -151,6 +151,27 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Deletes the list.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectList">The object list.</param>
+        /// <returns></returns>
+        public bool DeleteList<T>(List<T> objectList)
+        {
+            bool result = true;
+
+            foreach (T item in objectList)
+            {
+                if (this.DeleteRow(item) <= 0)
+                {
+                    result = false;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Deletes the row.
         /// </summary>
         /// <param name="deleteObj">The delete object.</param>

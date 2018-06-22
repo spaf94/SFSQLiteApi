@@ -407,7 +407,7 @@ namespace SFSQLiteApiTestApp
                 list.Add(a);
             }
 
-            //bool res = this.DbTest.InsertList<Author>(list);
+            bool res = this.DbTest.InsertList<Author>(list);
         }
     }
 }

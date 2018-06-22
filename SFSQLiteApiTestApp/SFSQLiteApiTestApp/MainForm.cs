@@ -409,5 +409,11 @@ namespace SFSQLiteApiTestApp
 
             bool res = this.DbTest.InsertList<Author>(list);
         }
+
+        private void buttonUpdateList_Click(object sender, EventArgs e)
+        {
+            List<Author> list = this.DbTest.SelectAllRows<Author>();
+            bool res = this.DbTest.UpdateList<Author>(list);
+        }
     }
 }

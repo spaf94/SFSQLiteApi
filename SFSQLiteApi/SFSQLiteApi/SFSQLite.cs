@@ -292,6 +292,25 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Updates the list.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectList">The object list.</param>
+        /// <returns></returns>
+        public bool UpdateList<T>(List<T> objectList)
+        {
+            if (this.Connection != null)
+            {
+                return (this.Connection.UpdateList<T>(objectList));
+            }
+            else
+            {
+                this.ThrowConnectionException();
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Updates the row.
         /// </summary>
         /// <param name="updateObj">The update object.</param>

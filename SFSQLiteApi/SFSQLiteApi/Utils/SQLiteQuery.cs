@@ -84,7 +84,7 @@ namespace SFSQLiteApi.Utils
                 byteArrayQuery.Append(" SET ");
                 byteArrayQuery.Append(byteArrayColumn);
                 byteArrayQuery.Append("=@img");
-                byteArrayQuery.Append(" WHERE");
+                byteArrayQuery.Append(" WHERE ");
                 byteArrayQuery.Append(where);
 
                 using (var command = new SQLiteCommand(connection))

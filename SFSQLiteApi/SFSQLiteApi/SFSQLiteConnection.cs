@@ -417,6 +417,27 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Updates the list.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objectList">The object list.</param>
+        /// <returns></returns>
+        public bool UpdateList<T>(List<T> objectList)
+        {
+            bool result = true;
+
+            foreach (T item in objectList)
+            {
+                if (this.UpdateRow(item) <= 0)
+                {
+                    result = false;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Updates the row.
         /// </summary>
         /// <param name="updateObj">The update object.</param>
@@ -483,37 +504,38 @@ namespace SFSQLiteApi
 
             if (string.IsNullOrWhiteSpace(whereClause))
             {
+                StringBuilder sbWhere = new StringBuilder();
+
                 foreach (string key in keyColumnList)
                 {
                     PropertyInfo property = propertyList.FirstOrDefault(x => x.Name == key);
 
                     if (property != null)
                     {
-                        updateQuery.Append(key);
-                        updateQuery.Append("=");
-                        updateQuery.Append("'");
-                        updateQuery.Append(property.GetValue(updateObj, null));
-                        updateQuery.Append("'");
+                        sbWhere.Append(key);
+                        sbWhere.Append("=");
+                        sbWhere.Append("'");
+                        sbWhere.Append(property.GetValue(updateObj, null));
+                        sbWhere.Append("'");
                     }
 
                     if (aux < keyColumnList.Count)
                     {
-                        updateQuery.Append(" AND ");
+                        sbWhere.Append(" AND ");
                     }
 
                     aux++;
                 }
-            }
-            else
-            {
-                updateQuery.Append(whereClause);
+
+                whereClause = sbWhere.ToString();
             }
 
+            updateQuery.Append(whereClause);
             int result = SQLiteQuery.ExecuteNonQuery(updateQuery.ToString(), this.Connection);
 
             if (result > 0)
             {
-                this.HandleByteArrayList(objectType.Name, byteArrayColumnList, byteArrayList, null);
+                this.HandleByteArrayList(objectType.Name, byteArrayColumnList, byteArrayList, whereClause);
             }
 
             return result;

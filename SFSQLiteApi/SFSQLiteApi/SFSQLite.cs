@@ -10,6 +10,15 @@ namespace SFSQLiteApi
 {
     public class SFSQLite
     {
+        #region Members
+
+        /// <summary>
+        /// The connection
+        /// </summary>
+        private SFSQLiteConnection connection = null;
+
+        #endregion Members
+
         #region Properties
 
         /// <summary>
@@ -18,7 +27,22 @@ namespace SFSQLiteApi
         /// <value>
         /// The connection.
         /// </value>
-        private SFSQLiteConnection Connection { get; set; }
+        private SFSQLiteConnection Connection
+        {
+            get
+            {
+                if (connection == null)
+                {
+                    throw new Exception("Connection not created. Use method OpenConnection().");
+                }
+
+                return connection;
+            }
+            set
+            {
+                connection = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the database.
@@ -142,14 +166,7 @@ namespace SFSQLiteApi
         /// <typeparam name="T"></typeparam>
         public void CreateTable<T>()
         {
-            if (this.Connection != null)
-            {
-                this.Connection.CreateTable<T>();
-            }
-            else
-            {
-                this.ThrowConnectionException();
-            }
+            this.Connection.CreateTable<T>();
         }
 
         /// <summary>
@@ -159,15 +176,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public bool DeleteAll<T>()
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.DeleteAll<T>());
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return false;
-            }
+            return (this.Connection.DeleteAll<T>());
         }
 
         /// <summary>
@@ -178,15 +187,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public bool DeleteList<T>(List<T> objectList)
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.DeleteList<T>(objectList));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return false;
-            }
+            return (this.Connection.DeleteList<T>(objectList));
         }
 
         /// <summary>
@@ -196,15 +197,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public int DeleteRow(object deleteObj)
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.DeleteRow(deleteObj));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return (-1);
-            }
+            return (this.Connection.DeleteRow(deleteObj));
         }
 
         /// <summary>
@@ -215,15 +208,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public object GetColumnMaxValue<T>(string columnName)
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.GetColumnMaxValue<T>(columnName));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return null;
-            }
+            return (this.Connection.GetColumnMaxValue<T>(columnName));
         }
 
         /// <summary>
@@ -234,15 +219,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public int GetRowsTotal<T>(string whereClause = "") where T : new()
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.GetRowsTotal<T>(whereClause));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return (-1);
-            }
+            return (this.Connection.GetRowsTotal<T>(whereClause));
         }
 
         /// <summary>
@@ -253,15 +230,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public bool InsertList<T>(List<T> objectList)
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.InsertList<T>(objectList));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return false;
-            }
+            return (this.Connection.InsertList<T>(objectList));
         }
 
         /// <summary>
@@ -271,15 +240,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public int InsertRow(object insertObj)
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.InsertRow(insertObj));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return (-1);
-            }
+            return (this.Connection.InsertRow(insertObj));
         }
 
         /// <summary>
@@ -298,15 +259,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public List<T> SelectAllRows<T>(string whereClause = "") where T : new()
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.SelectAllRows<T>(whereClause));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return null;
-            }
+            return (this.Connection.SelectAllRows<T>(whereClause));
         }
 
         /// <summary>
@@ -317,15 +270,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public T SelectOneRow<T>(string whereClause = "") where T : new()
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.SelectOneRow<T>(whereClause));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return new T();
-            }
+            return (this.Connection.SelectOneRow<T>(whereClause));
         }
 
         /// <summary>
@@ -336,15 +281,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public bool UpdateList<T>(List<T> objectList)
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.UpdateList<T>(objectList));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return false;
-            }
+            return (this.Connection.UpdateList<T>(objectList));
         }
 
         /// <summary>
@@ -355,15 +292,7 @@ namespace SFSQLiteApi
         /// <returns></returns>
         public int UpdateRow(object updateObj, string whereClause = "")
         {
-            if (this.Connection != null)
-            {
-                return (this.Connection.UpdateRow(updateObj, whereClause));
-            }
-            else
-            {
-                this.ThrowConnectionException();
-                return (-1);
-            }
+            return (this.Connection.UpdateRow(updateObj, whereClause));
         }
 
         #endregion Public Methods
@@ -379,15 +308,6 @@ namespace SFSQLiteApi
         private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             return EmbeddedAssembly.Get(args.Name);
-        }
-
-        /// <summary>
-        /// Throws the connection exception.
-        /// </summary>
-        /// <exception cref="System.Exception">Connection not created. Use method OpenConnection().</exception>
-        private void ThrowConnectionException()
-        {
-            throw new Exception("Connection not created. Use method OpenConnection().");
         }
 
         #endregion Private Methods

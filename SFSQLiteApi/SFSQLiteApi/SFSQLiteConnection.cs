@@ -233,6 +233,18 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Drops the table.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void DropTable<T>()
+        {
+            var objectType = typeof(T);
+            string sqlQuery = string.Format("DROP TABLE IF EXISTS {0}", objectType.Name);
+
+            SQLiteQuery.ExecuteNonQuery(sqlQuery, this.Connection);
+        }
+
+        /// <summary>
         /// Gets the column maximum value.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -281,8 +293,11 @@ namespace SFSQLiteApi
             }
             finally
             {
-                reader.Close();
-                reader = null;
+                if (reader != null)
+                {
+                    reader.Close();
+                    reader = null;
+                }
             }
 
             return returnValue;

@@ -201,6 +201,15 @@ namespace SFSQLiteApi
         }
 
         /// <summary>
+        /// Drops the table.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void DropTable<T>()
+        {
+            this.Connection.DropTable<T>();
+        }
+
+        /// <summary>
         /// Gets the column maximum value.
         /// </summary>
         /// <param name="tableName">Name of the table.</param>

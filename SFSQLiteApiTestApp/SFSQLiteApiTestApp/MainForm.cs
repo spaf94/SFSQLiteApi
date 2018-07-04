@@ -426,5 +426,10 @@ namespace SFSQLiteApiTestApp
         {
             bool res = this.DbTest.DeleteAll<Author>();
         }
+
+        private void buttonDropTable_Click(object sender, EventArgs e)
+        {
+            this.DbTest.DropTable<Author>();
+        }
     }
 }

@@ -48,11 +48,12 @@
             this.buttonGetTableName = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageSFSQLiteConnection = new System.Windows.Forms.TabPage();
+            this.buttonDropTable = new System.Windows.Forms.Button();
+            this.buttonDeleteAll = new System.Windows.Forms.Button();
             this.buttonDeleteList = new System.Windows.Forms.Button();
             this.buttonUpdateList = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPageSFSQLiteTool = new System.Windows.Forms.TabPage();
-            this.buttonDeleteAll = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageSFSQLiteConnection.SuspendLayout();
             this.tabPageSFSQLiteTool.SuspendLayout();
@@ -242,11 +243,12 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(322, 499);
+            this.tabControl1.Size = new System.Drawing.Size(626, 499);
             this.tabControl1.TabIndex = 18;
             // 
             // tabPageSFSQLiteConnection
             // 
+            this.tabPageSFSQLiteConnection.Controls.Add(this.buttonDropTable);
             this.tabPageSFSQLiteConnection.Controls.Add(this.buttonDeleteAll);
             this.tabPageSFSQLiteConnection.Controls.Add(this.buttonDeleteList);
             this.tabPageSFSQLiteConnection.Controls.Add(this.buttonUpdateList);
@@ -269,14 +271,34 @@
             this.tabPageSFSQLiteConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageSFSQLiteConnection.Name = "tabPageSFSQLiteConnection";
             this.tabPageSFSQLiteConnection.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSFSQLiteConnection.Size = new System.Drawing.Size(314, 473);
+            this.tabPageSFSQLiteConnection.Size = new System.Drawing.Size(618, 473);
             this.tabPageSFSQLiteConnection.TabIndex = 0;
             this.tabPageSFSQLiteConnection.Text = "SFSQLiteConnection";
             this.tabPageSFSQLiteConnection.UseVisualStyleBackColor = true;
             // 
+            // buttonDropTable
+            // 
+            this.buttonDropTable.Location = new System.Drawing.Point(309, 177);
+            this.buttonDropTable.Name = "buttonDropTable";
+            this.buttonDropTable.Size = new System.Drawing.Size(298, 23);
+            this.buttonDropTable.TabIndex = 19;
+            this.buttonDropTable.Text = "16 - Drop Table";
+            this.buttonDropTable.UseVisualStyleBackColor = true;
+            this.buttonDropTable.Click += new System.EventHandler(this.buttonDropTable_Click);
+            // 
+            // buttonDeleteAll
+            // 
+            this.buttonDeleteAll.Location = new System.Drawing.Point(309, 148);
+            this.buttonDeleteAll.Name = "buttonDeleteAll";
+            this.buttonDeleteAll.Size = new System.Drawing.Size(298, 23);
+            this.buttonDeleteAll.TabIndex = 18;
+            this.buttonDeleteAll.Text = "15 - Delete All";
+            this.buttonDeleteAll.UseVisualStyleBackColor = true;
+            this.buttonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
+            // 
             // buttonDeleteList
             // 
-            this.buttonDeleteList.Location = new System.Drawing.Point(6, 409);
+            this.buttonDeleteList.Location = new System.Drawing.Point(309, 119);
             this.buttonDeleteList.Name = "buttonDeleteList";
             this.buttonDeleteList.Size = new System.Drawing.Size(298, 23);
             this.buttonDeleteList.TabIndex = 17;
@@ -286,7 +308,7 @@
             // 
             // buttonUpdateList
             // 
-            this.buttonUpdateList.Location = new System.Drawing.Point(6, 380);
+            this.buttonUpdateList.Location = new System.Drawing.Point(309, 90);
             this.buttonUpdateList.Name = "buttonUpdateList";
             this.buttonUpdateList.Size = new System.Drawing.Size(298, 23);
             this.buttonUpdateList.TabIndex = 16;
@@ -296,7 +318,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(6, 351);
+            this.button1.Location = new System.Drawing.Point(309, 61);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(298, 23);
             this.button1.TabIndex = 15;
@@ -312,26 +334,16 @@
             this.tabPageSFSQLiteTool.Location = new System.Drawing.Point(4, 22);
             this.tabPageSFSQLiteTool.Name = "tabPageSFSQLiteTool";
             this.tabPageSFSQLiteTool.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSFSQLiteTool.Size = new System.Drawing.Size(314, 446);
+            this.tabPageSFSQLiteTool.Size = new System.Drawing.Size(618, 473);
             this.tabPageSFSQLiteTool.TabIndex = 1;
             this.tabPageSFSQLiteTool.Text = "SFSQLiteTool";
             this.tabPageSFSQLiteTool.UseVisualStyleBackColor = true;
-            // 
-            // buttonDeleteAll
-            // 
-            this.buttonDeleteAll.Location = new System.Drawing.Point(6, 438);
-            this.buttonDeleteAll.Name = "buttonDeleteAll";
-            this.buttonDeleteAll.Size = new System.Drawing.Size(298, 23);
-            this.buttonDeleteAll.TabIndex = 18;
-            this.buttonDeleteAll.Text = "15 - Delete All";
-            this.buttonDeleteAll.UseVisualStyleBackColor = true;
-            this.buttonDeleteAll.Click += new System.EventHandler(this.buttonDeleteAll_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 520);
+            this.ClientSize = new System.Drawing.Size(651, 520);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
             this.Text = "SFSQLiteApi Test App";
@@ -370,6 +382,7 @@
         private System.Windows.Forms.Button buttonUpdateList;
         private System.Windows.Forms.Button buttonDeleteList;
         private System.Windows.Forms.Button buttonDeleteAll;
+        private System.Windows.Forms.Button buttonDropTable;
     }
 }
 

@@ -152,17 +152,16 @@ namespace SFSQLiteApi.Utils
             foreach (PropertyInfo propertyInfo in propertyInfoList)
             {
                 if (propertyInfo.PropertyType.IsByteArray())
-                {
-                    value = "";
-                }
+                    value = string.Empty;
                 else
-                {
                     value = propertyInfo.GetValue(obj, null);
-                }
 
                 if (value == null)
                 {
-                    values += "NULL,";
+                    if (propertyInfo.PropertyType.IsString())
+                        values += "'',";
+                    else
+                        values += "NULL,";
                 }
                 else
                 {

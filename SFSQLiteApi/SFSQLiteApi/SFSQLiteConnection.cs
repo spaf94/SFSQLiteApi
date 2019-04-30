@@ -424,7 +424,7 @@ namespace SFSQLiteApi
                     {
                         if (property.IsDataMember())
                         {
-                            if (reader[property.Name].HaveContent())
+                            if (reader[property.Name].HaveContent() || property.PropertyType.IsString())
                             {
                                 Type type = property.PropertyType;
                                 TypeExtension.GetDataType(type, out type);

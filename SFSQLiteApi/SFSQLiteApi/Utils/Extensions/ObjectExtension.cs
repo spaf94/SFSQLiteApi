@@ -165,6 +165,9 @@ namespace SFSQLiteApi.Utils
                 }
                 else
                 {
+                    if (propertyInfo.PropertyType.IsFloatingPoint())
+                        value = value.ToString().Replace(",", ".");
+
                     values += string.Format("'{0}',", value);
                 }
             }

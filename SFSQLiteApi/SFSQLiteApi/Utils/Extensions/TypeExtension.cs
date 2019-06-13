@@ -166,6 +166,29 @@ namespace SFSQLiteApi.Utils
             return Blob;
         }
 
+        /// <summary>
+        /// Determines whether [is floating point].
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>
+        ///   <c>true</c> if [is floating point] [the specified type]; otherwise, <c>false</c>.
+        /// </returns>
+        public static bool IsFloatingPoint(this Type type)
+        {
+            GetDataType(type, out type);
+            TypeCode typeCode = Type.GetTypeCode(type);
+
+            switch (typeCode)
+            {
+                case TypeCode.Double:
+                case TypeCode.Single:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         #endregion Public Methods
     }
 }

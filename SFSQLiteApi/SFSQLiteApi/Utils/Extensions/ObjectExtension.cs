@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -6,81 +7,6 @@ namespace SFSQLiteApi.Utils
 {
     internal static class ObjectExtension
     {
-        /// <summary>
-        /// Haves the content.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns></returns>
-        public static bool HaveContent(this object value)
-        {
-            if (value == null)
-            {
-                return false;
-            }
-
-            return (!string.IsNullOrWhiteSpace(value.ToString()));
-        }
-
-        /// <summary>
-        /// Gets the property information list.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static List<PropertyInfo> GetPropertyInfoList(this object obj)
-        {
-            return (obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.IsDataMember()).ToList());
-        }
-
-        /// <summary>
-        /// Gets the key list.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static List<PropertyInfo> GetKeyList(this object obj)
-        {
-            return (obj.GetType()
-                       .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                       .Where(x => x.IsDataMember() && x.IsKey())
-                       .ToList());
-        }
-
-        /// <summary>
-        /// Gets the key string.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static string GetKeyString(this object obj)
-        {
-            string keyString = null;
-            var keyList = obj.GetKeyList();
-
-            if (keyList != null && keyList.Count > 0)
-            {
-                foreach (PropertyInfo propertyInfo in keyList)
-                {
-                    keyString += string.Format(" {0}='{1}' AND", propertyInfo.Name, propertyInfo.GetValue(obj, null));
-                }
-
-                keyString = keyString.Remove((keyString.Length - 3), 3);
-            }
-
-            return keyString;
-        }
-
-        /// <summary>
-        /// Gets the property information name list.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static List<string> GetPropertyInfoNameList(this object obj)
-        {
-            return (obj.GetType()
-                       .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                       .Where(x => x.IsDataMember())
-                       .Select(x => x.GetSQLName())
-                       .ToList());
-        }
-
         /// <summary>
         /// Gets the byte array columns.
         /// </summary>
@@ -106,75 +32,6 @@ namespace SFSQLiteApi.Utils
                        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                        .Where(x => x.IsDataMember() && x.PropertyType.IsByteArray())
                        .ToList());
-        }
-
-        /// <summary>
-        /// Gets the name.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static string GetName(this object obj)
-        {
-            return (obj.GetType().Name);
-        }
-
-        /// <summary>
-        /// Gets the columns.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static string GetColumns(this object obj)
-        {
-            string columns = null;
-            var propertyInfoNameList = obj.GetPropertyInfoNameList();
-
-            for (int i = 0; i < propertyInfoNameList.Count; i++)
-            {
-                columns += propertyInfoNameList[i] + ",";
-            }
-
-            columns = columns.Remove((columns.Length - 1), 1);
-
-            return columns;
-        }
-
-        /// <summary>
-        /// Gets the values.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns></returns>
-        public static string GetValues(this object obj)
-        {
-            string values = null;
-            object value = null;
-            var propertyInfoList = obj.GetPropertyInfoList();
-
-            foreach (PropertyInfo propertyInfo in propertyInfoList)
-            {
-                if (propertyInfo.PropertyType.IsByteArray())
-                    value = string.Empty;
-                else
-                    value = propertyInfo.GetValue(obj, null);
-
-                if (value == null)
-                {
-                    if (propertyInfo.PropertyType.IsString())
-                        values += "'',";
-                    else
-                        values += "NULL,";
-                }
-                else
-                {
-                    if (propertyInfo.PropertyType.IsFloatingPoint())
-                        value = value.ToString().Replace(",", ".");
-
-                    values += string.Format("'{0}',", value);
-                }
-            }
-
-            values = values.Remove((values.Length - 1), 1);
-
-            return values;
         }
 
         /// <summary>
@@ -218,6 +75,152 @@ namespace SFSQLiteApi.Utils
             {
                 return obj.GetByteArrayValues();
             }
+        }
+
+        /// <summary>
+        /// Gets the columns.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static string GetColumns(this object obj)
+        {
+            string columns = null;
+            var propertyInfoNameList = obj.GetPropertyInfoNameList();
+
+            for (int i = 0; i < propertyInfoNameList.Count; i++)
+            {
+                columns += propertyInfoNameList[i] + ",";
+            }
+
+            columns = columns.Remove((columns.Length - 1), 1);
+
+            return columns;
+        }
+
+        /// <summary>
+        /// Gets the key list.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static List<PropertyInfo> GetKeyList(this object obj)
+        {
+            return (obj.GetType()
+                       .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                       .Where(x => x.IsDataMember() && x.IsKey())
+                       .ToList());
+        }
+
+        /// <summary>
+        /// Gets the key string.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static string GetKeyString(this object obj)
+        {
+            string keyString = null;
+            var keyList = obj.GetKeyList();
+
+            if (keyList != null && keyList.Count > 0)
+            {
+                foreach (PropertyInfo propertyInfo in keyList)
+                {
+                    keyString += string.Format(" {0}='{1}' AND", propertyInfo.Name, propertyInfo.GetValue(obj, null));
+                }
+
+                keyString = keyString.Remove((keyString.Length - 3), 3);
+            }
+
+            return keyString;
+        }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static string GetName(this object obj)
+        {
+            return (obj.GetType().Name);
+        }
+
+        /// <summary>
+        /// Gets the property information list.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static List<PropertyInfo> GetPropertyInfoList(this object obj)
+        {
+            return (obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.IsDataMember()).ToList());
+        }
+
+        /// <summary>
+        /// Gets the property information name list.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static List<string> GetPropertyInfoNameList(this object obj)
+        {
+            return (obj.GetType()
+                       .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                       .Where(x => x.IsDataMember())
+                       .Select(x => x.GetSQLName())
+                       .ToList());
+        }
+
+        /// <summary>
+        /// Gets the values.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        /// <returns></returns>
+        public static string GetValues(this object obj)
+        {
+            string values = null;
+            object value = null;
+            var propertyInfoList = obj.GetPropertyInfoList();
+
+            foreach (PropertyInfo propertyInfo in propertyInfoList)
+            {
+                if (propertyInfo.PropertyType.IsByteArray())
+                    value = string.Empty;
+                else
+                    value = propertyInfo.GetValue(obj, null);
+
+                if (value == null)
+                {
+                    if (propertyInfo.PropertyType.IsString())
+                        values += "'',";
+                    else
+                        values += "NULL,";
+                }
+                else
+                {
+                    if (propertyInfo.PropertyType.IsFloatingPoint())
+                        value = value.ToString().Replace(",", ".");
+                    else if (propertyInfo.PropertyType.IsBool())
+                        value = Convert.ToInt32(value);
+
+                    values += string.Format("'{0}',", value);
+                }
+            }
+
+            values = values.Remove((values.Length - 1), 1);
+
+            return values;
+        }
+
+        /// <summary>
+        /// Haves the content.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns></returns>
+        public static bool HaveContent(this object value)
+        {
+            if (value == null)
+            {
+                return false;
+            }
+
+            return (!string.IsNullOrWhiteSpace(value.ToString()));
         }
     }
 }

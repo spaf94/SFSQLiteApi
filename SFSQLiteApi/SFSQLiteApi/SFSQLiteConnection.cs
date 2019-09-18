@@ -98,10 +98,10 @@ namespace SFSQLiteApi
                     {
                         if (property.IsKey())
                         {
-                            keyColumnList.Add(property.Name);
+                            keyColumnList.Add(property.GetSQLName());
                         }
 
-                        sbCreateTable.Append(property.Name);
+                        sbCreateTable.Append(property.GetSQLName());
                         sbCreateTable.Append(" ");
                         sbCreateTable.Append(property.PropertyType.ToSQLiteDataType());
 
@@ -445,8 +445,11 @@ namespace SFSQLiteApi
             }
             finally
             {
-                reader.Close();
-                reader = null;
+                if(reader != null)
+                {
+                    reader.Close();
+                    reader = null;
+                }
             }
 
             return objectList;
@@ -514,10 +517,10 @@ namespace SFSQLiteApi
                 {
                     if (property.IsKey())
                     {
-                        keyColumnList.Add(property.Name);
+                        keyColumnList.Add(property.GetSQLName());
                     }
 
-                    updateQuery.Append(property.Name);
+                    updateQuery.Append(property.GetSQLName());
                     updateQuery.Append("=");
 
                     object value = property.GetValue(updateObj, null);
@@ -557,7 +560,7 @@ namespace SFSQLiteApi
 
                 foreach (string key in keyColumnList)
                 {
-                    PropertyInfo property = propertyList.FirstOrDefault(x => x.Name == key);
+                    PropertyInfo property = propertyList.FirstOrDefault(x => x.GetSQLName() == key);
 
                     if (property != null)
                     {

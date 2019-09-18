@@ -6,6 +6,18 @@ namespace SFSQLiteApi.Utils
     internal static class PropertyInfoExtension
     {
         /// <summary>
+        /// Gets the name of the SQL.
+        /// </summary>
+        /// <param name="property">The property.</param>
+        /// <returns></returns>
+        public static string GetSQLName(this PropertyInfo property)
+        {
+            if (property != null)
+                return (string.Format("'{0}'", property.Name));
+            return string.Empty;
+        }
+
+        /// <summary>
         /// Determines whether [is data member].
         /// </summary>
         /// <param name="property">The property.</param>

@@ -77,7 +77,7 @@ namespace SFSQLiteApi.Utils
             return (obj.GetType()
                        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                        .Where(x => x.IsDataMember())
-                       .Select(x => x.Name)
+                       .Select(x => x.GetSQLName())
                        .ToList());
         }
 
